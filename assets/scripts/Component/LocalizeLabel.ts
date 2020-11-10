@@ -20,10 +20,16 @@ export default class LocalizeLabel extends cc.Label {
     }
 
     protected onLoad() {
-        super.onLoad()
-     }
+        super.onLoad();
+    }
 
     private updateString() {
-        this.string = `${this._tid}`;
+        if (CC_EDITOR && this._tid) {
+            Editor.Ipc.sendToMain("game-helper:get-str", this._tid.split(","), (error: Error, str: string) => {
+                this.string = str;
+            });
+        } else {
+            //
+        }
     }
 }

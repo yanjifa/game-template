@@ -4,6 +4,7 @@
         "TID_BTN_OK": "OK",
         "TID_BTN_CANCEL": "CANCEL",
         "TID_BTN_SETTING": "SETTING",
-        "TID_UI_HELLO_WORLD": "HELLO WORLD"
+        "TID_UI_HELLO_WORLD": "HELLO WORLD",
+        "TID_UI_MSG_TEST": "${p1} 已经 ${p2} 岁了."
     }
 }

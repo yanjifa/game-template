@@ -177,7 +177,7 @@
       "array": [
         0,
         0,
-        432.14667648843493,
+        478.04602288901015,
         0,
         0,
         0,
@@ -385,7 +385,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 199.36,
+      "width": 378.01,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -437,8 +437,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "hello World",
-    "_N$string": "hello World",
+    "_string": "alpha is 27 years old.",
+    "_N$string": "alpha is 27 years old.",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -453,7 +453,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_tid": "hello World",
+    "_tid": "TID_UI_MSG_TEST,alpha,27",
     "_id": "6cMQrP09xF9qFW6xzQsfMq"
   },
   {
