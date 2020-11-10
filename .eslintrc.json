@@ -1,0 +1,96 @@
+{
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "rules": {
+        // 强制 4 空格缩进
+        "indent": [
+            "warn",
+            4
+        ],
+        "no-console": [
+            "warn",
+            {
+                "allow": [
+                    "time",
+                    "timeEnd",
+                    "table",
+                    "info",
+                    "warn",
+                    "error"
+                ]
+            }
+        ],
+        // 强制双引号
+        "quotes": [
+            "error",
+            "double"
+        ],
+        // 一行最大 160 字符
+        "max-len": [
+            "warn",
+            {
+                "code": 160
+            }
+        ],
+        "no-unused-vars": "off",
+        "no-undef": "off",
+        "semi": [
+            "error",
+            "always",
+            {
+                "omitLastInOneLineBlock": true
+            }
+        ],
+        "semi-spacing": "error",
+        "no-extra-semi": "error",
+        "comma-spacing": [
+            "warn",
+            {
+                "before": false,
+                "after": true
+            }
+        ],
+        "comma-dangle": [
+            "error",
+            "always-multiline"
+        ],
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 2,
+                "maxEOF": 1,
+                "maxBOF": 1
+            }
+        ],
+        "line-comment-position": [
+            "error",
+            {
+                "position": "above"
+            }
+        ],
+        "spaced-comment": ["error", "always", {
+            "line": {
+                "markers": ["/"],
+                "exceptions": ["-", "+"]
+            },
+            "block": {
+                "markers": ["!"],
+                "exceptions": ["*"],
+                "balanced": true
+            }
+        }]
+    }
+}

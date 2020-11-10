@@ -1,0 +1,9 @@
+{
+    "language": "zh",
+    "data": {
+        "TID_BTN_OK": "OK",
+        "TID_BTN_CANCEL": "CANCEL",
+        "TID_BTN_SETTING": "SETTING",
+        "TID_UI_HELLO_WORLD": "HELLO WORLD"
+    }
+}
