@@ -423,7 +423,7 @@
     "_id": "8bx1KAoLpBpZk2hk8zOjEH"
   },
   {
-    "__type__": "cc.Label",
+    "__type__": "71243LgcrZORZDFQr8RHolk",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -453,6 +453,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
+    "_tid": "hello World",
     "_id": "6cMQrP09xF9qFW6xzQsfMq"
   },
   {
