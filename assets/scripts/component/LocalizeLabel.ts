@@ -1,3 +1,5 @@
+import Game from "../Game";
+
 const {ccclass, property, executeInEditMode, menu, inspector} = cc._decorator;
 
 @ccclass
@@ -21,15 +23,20 @@ export default class LocalizeLabel extends cc.Label {
 
     protected onLoad() {
         super.onLoad();
+        this._tid && this.updateString();
+
     }
 
     private updateString() {
-        if (CC_EDITOR && this._tid) {
-            Editor.Ipc.sendToMain("game-helper:get-str", this._tid.split(","), (error: Error, str: string) => {
+        if (CC_EDITOR) {
+            Editor.Ipc.sendToMain("game-helper:getLangStr", this._tid, (e: Error, str: string) => {
+                if (e) {
+                    return;
+                }
                 this.string = str;
             });
         } else {
-            //
+            this.string = Game.LocalizeUtil.get(this._tid);
         }
     }
 }

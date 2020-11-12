@@ -1,9 +1,9 @@
-import AudioManager from "./Manager/AudioManager";
-import PopViewManager from "./Manager/PopViewManager";
-import GameUtil from "./Util/GameUtil";
-import LocalizeUtil from "./Util/LocalizeUtil";
-import NotifyUtil from "./Util/NotifyUtil";
-import StorageUtil from "./Util/StorageUtil";
+import AudioManager from "./manager/AudioManager";
+import PopViewManager from "./manager/PopViewManager";
+import GameUtil from "./util/GameUtil";
+import LocalizeUtil from "./util/LocalizeUtil";
+import NotifyUtil from "./util/NotifyUtil";
+import StorageUtil from "./util/StorageUtil";
 
 export default class Game {
     /** 音频管理器 */

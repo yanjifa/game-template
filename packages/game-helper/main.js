@@ -1,41 +1,46 @@
 "use strict";
-const Fs = require("fs");
 
-let stringObj = {};
-let language = "en";
+const ipcMain = require("electron").ipcMain;
+const fs = require("fs");
 
 module.exports = {
+
+    localizeCfgs: null,
+
     load() {
-        Editor.assetdb.queryAssets(`db://assets/resources/language/${language}/*`, "json", (error, res) => {
-            if (error) {
-                Editor.error(error);
-            } else if (res.length > 0) {
-                const path = res[0].path;
-                stringObj = JSON.parse(Fs.readFileSync(path, "utf-8"));
-            } else {
-                Editor.error("未找到多语言配置文件!, 检查设置");
-            }
-        });
+        ipcMain.on("editor:ready", this.onEditorReady.bind(this));
+        //
+        this.profiles.load();
+        const configPath = this.profiles.get("path");
+        const lang = this.profiles.get("lang");
+        const fileName = this.profiles.get("fileName");
+        try {
+            this.localizeCfgs = JSON.parse(fs.readFileSync(`${Editor.Project.path}/${configPath}/${lang}/${fileName}`, "utf-8"));
+            Editor.success("多语言配置加载成功:", lang);
+        } catch (e) {
+            Editor.warn("多语言配置加载失败:", e);
+        }
     },
+
     unload() {
         // execute when package unloaded
     },
+
+    onEditorReady() {
+        //
+    },
+
     messages: {
-        "open"() {
-            // open entry panel registered in package.json
+        open() {
             Editor.Panel.open("game-helper");
         },
-        "say-hello"() {
-            Editor.log("Hello World!");
-            // send ipc message to panel
-            Editor.Ipc.sendToPanel("game-helper", "game-helper:hello");
-        },
-        "clicked"() {
-            Editor.log("Button clicked!");
-        },
-        "get-str": function (event, param) {
-            const [tid, ...args] = param;
-            let str = stringObj.data[tid];
+        // 获取多语言配置字符串
+        getLangStr(event, param) {
+            if (this.localizeCfgs === null) {
+                event.reply(new Error("config not load"), null);
+            }
+            const [tid, ...args] = param.split(",");
+            let str = this.localizeCfgs[tid];
             if (str) {
                 args.forEach((arg, index) => {
                     str = str.replace("${p" + (index + 1) + "}", arg);
@@ -44,6 +49,18 @@ module.exports = {
             } else {
                 event.reply(null, tid);
             }
+        },
+    },
+
+    profiles: {
+        config: null,
+        path: "",
+        load() {
+            this.path = Editor.url("packages://game-helper/package.json");
+            this.config = JSON.parse(fs.readFileSync(this.path, "utf8"));
+        },
+        get(key) {
+            return this.config.profiles.local[key];
         },
     },
 };

@@ -1,3 +1,4 @@
+import Bluebird = require("bluebird");
 import Game from "./Game";
 
 const {ccclass, property} = cc._decorator;
@@ -7,25 +8,25 @@ export default class Main extends cc.Component {
 
     protected onLoad() {
         (window as any).Game = Game;
-        const data = [
-            1, 2, 3,
-        ];
     }
 
-    protected start() {
-        this.gameSetup().then(() => {
-            console.info("gameSetup success");
-        }).catch((e) => {
-            console.error("gameSetup fail", e);
+    protected async start() {
+        await this.gameSetup();
+        await Bluebird.fromCallback((callback) => {
+            cc.resources.load<cc.Prefab>("localizeCase/LocalizeCase", (error, prefab) => {
+                const node = cc.instantiate(prefab);
+                node.parent = this.node;
+                callback(error);
+            });
         });
     }
 
     private async gameSetup() {
-        await Game.AudioManager.setup();
-        await Game.PopViewManager.setup();
         await Game.GameUtil.setup();
         await Game.LocalizeUtil.setup();
         await Game.NotifyUtil.setup();
         await Game.StorageUtil.setup();
+        await Game.AudioManager.setup();
+        await Game.PopViewManager.setup();
     }
 }

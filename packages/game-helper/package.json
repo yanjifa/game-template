@@ -1,22 +1,29 @@
 {
-  "name": "game-helper",
-  "version": "0.0.1",
-  "description": "The package template for getting started.",
-  "author": "Cocos Creator",
-  "main": "main.js",
-  "main-menu": {
-    "i18n:MAIN_MENU.package.title/game-helper/open": {
-      "message": "game-helper:open"
+    "name": "game-helper",
+    "version": "0.0.1",
+    "description": "The package template for getting started.",
+    "author": "Cocos Creator",
+    "main": "main.js",
+    "main-menu": {
+        "i18n:MAIN_MENU.package.title/game-helper/open": {
+            "message": "game-helper:open"
+        },
+        "i18n:MAIN_MENU.package.title/game-helper/hello": {
+            "message": "game-helper:say-hello"
+        }
     },
-    "i18n:MAIN_MENU.package.title/game-helper/hello": {
-      "message": "game-helper:say-hello"
+    "profiles": {
+        "local": {
+            "path": "assets/resources/language",
+            "lang": "zh",
+            "fileName": "StringConfig.json"
+        }
+    },
+    "panel": {
+        "main": "panel/index.js",
+        "type": "dockable",
+        "title": "game-helper",
+        "width": 400,
+        "height": 300
     }
-  },
-  "panel": {
-    "main": "panel/index.js",
-    "type": "dockable",
-    "title": "game-helper",
-    "width": 400,
-    "height": 300
-  }
 }
