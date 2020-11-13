@@ -6,6 +6,6 @@ export default class PopViewManager extends BaseSingleton {
     }
 
     public registPopView() {
-
+        //
     }
 }

@@ -7,7 +7,7 @@ const {ccclass, property} = cc._decorator;
 export default class Main extends cc.Component {
 
     protected onLoad() {
-        (window as any).Game = Game;
+        window["Game"] = Game;
     }
 
     protected async start() {

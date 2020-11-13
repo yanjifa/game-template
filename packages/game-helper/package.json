@@ -2,7 +2,7 @@
     "name": "game-helper",
     "version": "0.0.1",
     "description": "The package template for getting started.",
-    "author": "Cocos Creator",
+    "author": "yanjifa",
     "main": "main.js",
     "main-menu": {
         "i18n:MAIN_MENU.package.title/game-helper/open": {
