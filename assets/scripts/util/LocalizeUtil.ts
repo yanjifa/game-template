@@ -1,25 +1,37 @@
 import Bluebird = require("bluebird");
-import _ = require("lodash");
+import * as _ from "lodash";
 import BaseSingleton from "../base/BaseSingeton";
+import { ELanguageType, ENotifyType } from "../Enum";
+import Game from "../Game";
 
 export default class LocalizeUtil extends BaseSingleton {
 
-    private localizeCfgs: { [key: string]: string } = {};
+    private localizeCfgs: Record<string, string> = {};
+
+    private language: ELanguageType = cc.sys.language as ELanguageType;
 
     public async setup() {
-        // const lang = cc.sys.language;
-        // const lang = cc.sys.LANGUAGE_ENGLISH;
-        const lang = cc.sys.LANGUAGE_CHINESE;
+        this.loadStringConfig();
+        console.info("LocalizeUtil setup");
+    }
+
+    private async loadStringConfig() {
         await Bluebird.fromCallback((callback) => {
-            cc.resources.load<cc.JsonAsset>(`language/${lang}/StringConfig`, (error, asset) => {
+            cc.resources.load<cc.JsonAsset>(`language/${this.language}/StringConfig`, (error, asset) => {
                 this.localizeCfgs = asset.json;
                 callback(error);
             });
         });
-        console.info("LocalizeUtil");
+        cc.resources.release(`language/${this.language}/StringConfig`);
     }
 
-    public get(tid: string) {
+    public async changeLanguage(lang: ELanguageType) {
+        this.language = lang;
+        await this.loadStringConfig();
+        Game.NotifyUtil.emit(ENotifyType.LANGUAGE_CHANGED);
+    }
+
+    public getLangStr(tid: string): string {
         const [id, ...args] = tid.split(",");
         let str = this.localizeCfgs[id];
         args.forEach((arg, index) => {

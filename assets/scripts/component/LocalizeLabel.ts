@@ -1,3 +1,4 @@
+import { ENotifyType } from "../Enum";
 import Game from "../Game";
 
 const {ccclass, property, executeInEditMode, menu, inspector} = cc._decorator;
@@ -8,7 +9,7 @@ const {ccclass, property, executeInEditMode, menu, inspector} = cc._decorator;
 @inspector("packages://game-helper/inspectors/localizelabel.js")
 export default class LocalizeLabel extends cc.Label {
     @property()
-    private _tid: string = "";
+    private _tid = "";
     @property({
         multiline: true,
         tooltip: "多语言 text id",
@@ -23,8 +24,17 @@ export default class LocalizeLabel extends cc.Label {
 
     protected onLoad() {
         super.onLoad();
+        Game.NotifyUtil.on(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
         this._tid && this.updateString();
+    }
 
+    protected onDestroy() {
+        super.onDestroy();
+        Game.NotifyUtil.off(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
+    }
+
+    private onLanguageChanged() {
+        this.updateString();
     }
 
     private updateString() {
@@ -36,7 +46,7 @@ export default class LocalizeLabel extends cc.Label {
                 this.string = str;
             });
         } else {
-            this.string = Game.LocalizeUtil.get(this._tid);
+            this.string = Game.LocalizeUtil.getLangStr(this._tid);
         }
     }
 }

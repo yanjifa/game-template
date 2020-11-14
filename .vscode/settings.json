@@ -1,0 +1,8 @@
+{
+    "files.exclude": {
+        "**/*.meta": true,
+        "library": true,
+        "local": true,
+        "temp": true
+    }
+}
