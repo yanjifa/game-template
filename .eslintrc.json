@@ -1,7 +1,6 @@
 {
 	"env": {
-		"browser": true,
-		"node": true
+		"browser": true
 	},
 	"extends": ["eslint:recommended"],
 	"parserOptions": {
@@ -9,21 +8,25 @@
 		"sourceType": "module"
 	},
 	"rules": {
+		// 4 空格缩进
 		"indent": ["warn", 4],
-		"no-console": ["warn", {
-			"allow": ["time", "timeEnd", "table", "info", "warn", "error"]
-		}],
+		// 使用双引号
 		"quotes": ["error", "double"],
+		// 行尾空格
+		"no-trailing-spaces": "warn",
+		// 一行最大长度
 		"max-len": ["warn", {
 			"code": 160
 		}],
 		"no-unused-vars": "off",
 		"no-undef": "off",
+		// 冒号相关
 		"semi": ["error", "always", {
 			"omitLastInOneLineBlock": true
 		}],
 		"semi-spacing": "error",
 		"no-extra-semi": "error",
+		// 注释
 		"comma-spacing": ["warn", {
 			"before": false,
 			"after": true
@@ -49,6 +52,7 @@
 			}
 		}]
 	},
+	// 针对 typescript
 	"overrides": [
         {
             "files": ["*.ts"],
