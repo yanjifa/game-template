@@ -5,9 +5,9 @@ const {ccclass, property, executeInEditMode, menu, inspector} = cc._decorator;
 
 @ccclass
 @executeInEditMode()
-@menu("i18n:MAIN_MENU.component.renderers/LocalizeLabel")
-@inspector("packages://game-helper/inspectors/localizelabel.js")
-export default class LocalizeLabel extends cc.Label {
+@menu("i18n:MAIN_MENU.component.renderers/LocalizedLabel")
+@inspector("packages://game-helper/inspectors/localizedlabel.js")
+export default class LocalizedLabel extends cc.Label {
     @property()
     private _tid = "";
     @property({

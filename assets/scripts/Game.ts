@@ -1,7 +1,7 @@
 import AudioManager from "./manager/AudioManager";
 import PopViewManager from "./manager/PopViewManager";
 import GameUtil from "./util/GameUtil";
-import LocalizeUtil from "./util/LocalizeUtil";
+import LocalizedUtil from "./util/LocalizedUtil";
 import NotifyUtil from "./util/NotifyUtil";
 import StorageUtil from "./util/StorageUtil";
 
@@ -19,8 +19,8 @@ export default class Game {
         return GameUtil.getInstance();
     }
     /** 多语言工具类 */
-    public static get LocalizeUtil(): LocalizeUtil {
-        return LocalizeUtil.getInstance();
+    public static get LocalizeUtil(): LocalizedUtil {
+        return LocalizedUtil.getInstance();
     }
     /** 全局通知工具 */
     public static get NotifyUtil(): NotifyUtil {

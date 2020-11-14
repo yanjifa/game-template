@@ -4,7 +4,7 @@ import BaseSingleton from "../base/BaseSingeton";
 import { ELanguageType, ENotifyType } from "../Enum";
 import Game from "../Game";
 
-export default class LocalizeUtil extends BaseSingleton {
+export default class LocalizedUtil extends BaseSingleton {
 
     private localizeCfgs: Record<string, string> = {};
 
@@ -12,7 +12,7 @@ export default class LocalizeUtil extends BaseSingleton {
 
     public async setup() {
         this.loadStringConfig();
-        console.info("LocalizeUtil setup");
+        console.info("LocalizedUtil setup");
     }
 
     private async loadStringConfig() {

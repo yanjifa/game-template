@@ -13,7 +13,7 @@ export default class Main extends cc.Component {
     protected async start() {
         await this.gameSetup();
         await Bluebird.fromCallback((callback) => {
-            cc.resources.load<cc.Prefab>("localizeCase/LocalizeCase", (error, prefab) => {
+            cc.resources.load<cc.Prefab>("localizedCase/LocalizedCase", (error, prefab) => {
                 const node = cc.instantiate(prefab);
                 node.parent = this.node;
                 callback(error);

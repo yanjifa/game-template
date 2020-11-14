@@ -1,5 +1,5 @@
 "use strict";
-Vue.component("localize-label",
+Vue.component("localized-label",
     {
         dependencies: ["packages://inspector/share/blend.js", "packages://inspector/inspectors/comps/label.js"],
         template: `
@@ -11,10 +11,10 @@ Vue.component("localize-label",
             `,
         props: {
             target: { twoWay: true, type: Object },
-            multi: { type: Boolean }
+            multi: { type: Boolean },
         },
         methods:
         {
             T: Editor.T,
-        }
+        },
     });
