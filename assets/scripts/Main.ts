@@ -31,6 +31,11 @@ export default class Main extends cc.Component {
         this.blockStateLabel.node.active = TEST;
     }
 
+    protected onDestroy() {
+        Game.NotifyUtil.off(ENotifyType.BLOCK_INPUT_SHOW, this.showBlockInput, this);
+        Game.NotifyUtil.off(ENotifyType.BLOCK_INPUT_HIDE, this.hideBlockInput, this);
+    }
+
     protected async start() {
         await this.gameSetup();
         Game.NotifyUtil.on(ENotifyType.BLOCK_INPUT_SHOW, this.showBlockInput, this);
@@ -39,10 +44,10 @@ export default class Main extends cc.Component {
     }
 
     private async gameSetup() {
+        await Game.StorageUtil.setup();
         await Game.GameUtil.setup();
         await Game.LocalizeUtil.setup();
         await Game.NotifyUtil.setup();
-        await Game.StorageUtil.setup();
         await Game.AudioManager.setup();
         await Game.PopViewManager.setup();
     }

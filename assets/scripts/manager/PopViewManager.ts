@@ -92,7 +92,7 @@ export default class PopViewManager extends BaseSingleton {
         this.createdPopViews.push(popView);
         popView.initPopView(createData.userData);
         await popView.showPopView();
-        // 继续创建队列中的 view
+        // 递归创建队列中的 view
         await this.createPopView();
     }
 
