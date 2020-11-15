@@ -1,26 +1,27 @@
 {
-  "name": "game-template",
-  "version": "1.0.0",
-  "description": "Hello world new project template.",
-  "dependencies": {
-    "bluebird": "^3.7.2",
-    "lodash": "^4.17.20"
-  },
-  "devDependencies": {
-    "@types/lodash": "^4.14.165",
-    "@types/bluebird": "^3.5.33"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yanjifa/game-template.git"
-  },
-  "author": "yanjifa",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/yanjifa/game-template/issues"
-  },
-  "homepage": "https://github.com/yanjifa/game-template#readme"
+    "name": "game-template",
+    "version": "1.0.0",
+    "description": "Hello world new project template.",
+    "dependencies": {
+        "bluebird": "^3.7.2",
+        "lodash": "^4.17.20"
+    },
+    "devDependencies": {
+        "@types/lodash": "^4.14.165",
+        "@types/bluebird": "^3.5.33"
+    },
+    "scripts": {
+        "lint-check": "eslint --fix-dry-run ./",
+        "lint-fix": "eslint --fix ./"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/yanjifa/game-template.git"
+    },
+    "author": "yanjifa",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/yanjifa/game-template/issues"
+    },
+    "homepage": "https://github.com/yanjifa/game-template#readme"
 }

@@ -25,7 +25,7 @@ export default class LocalizedLabel extends cc.Label {
     protected onLoad() {
         super.onLoad();
         Game.NotifyUtil.on(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
-        this._tid && this.updateString();
+        this.updateString();
     }
 
     protected onDestroy() {
@@ -38,6 +38,9 @@ export default class LocalizedLabel extends cc.Label {
     }
 
     private updateString() {
+        if (!this._tid) {
+            return;
+        }
         if (CC_EDITOR) {
             Editor.Ipc.sendToMain("game-helper:getLangStr", this._tid, (e: Error, str: string) => {
                 if (e) {

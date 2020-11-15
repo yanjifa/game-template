@@ -11,6 +11,18 @@ module.exports = {
         ipcMain.on("editor:ready", this.onEditorReady.bind(this));
         //
         this.profiles.load();
+        this.loadLangConfig();
+    },
+
+    unload() {
+        // execute when package unloaded
+    },
+
+    onEditorReady() {
+        //
+    },
+
+    loadLangConfig() {
         const configPath = this.profiles.get("path");
         const lang = this.profiles.get("lang");
         const fileName = this.profiles.get("fileName");
@@ -22,17 +34,13 @@ module.exports = {
         }
     },
 
-    unload() {
-        // execute when package unloaded
-    },
-
-    onEditorReady() {
-        //
-    },
-
     messages: {
         open() {
             Editor.Panel.open("game-helper");
+        },
+        // reload lang config
+        reload() {
+            this.loadLangConfig();
         },
         // 获取多语言配置字符串
         getLangStr(event, param) {

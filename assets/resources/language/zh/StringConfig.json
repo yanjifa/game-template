@@ -1,7 +1,10 @@
 {
-    "TID_BTN_OK": "好的",
-    "TID_BTN_CANCEL": "取消",
-    "TID_BTN_SETTING": "设置",
-    "TID_UI_HELLO_WORLD": "你好，世界",
-    "TID_UI_MSG_TEST": "${p1} 已经 ${p2} 岁了。"
+    "TID_LABEL_LANGUAGE": "语言",
+    "TID_LABEL_EN": "English",
+    "TID_LABEL_ZH": "中文",
+    "TID_LABEL_OK": "好的",
+    "TID_LABEL_CANCEL": "取消",
+    "TID_LABEL_SETTING": "设置",
+    "TID_LABEL_HELLO_WORLD": "你好，世界",
+    "TID_LABEL_TEST": "${p1} 已经 ${p2} 岁了。"
 }

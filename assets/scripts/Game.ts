@@ -1,3 +1,4 @@
+import AssetManager from "./manager/AssetManager";
 import AudioManager from "./manager/AudioManager";
 import PopViewManager from "./manager/PopViewManager";
 import GameUtil from "./util/GameUtil";
@@ -6,6 +7,10 @@ import NotifyUtil from "./util/NotifyUtil";
 import StorageUtil from "./util/StorageUtil";
 
 export default class Game {
+    /** 资源管理器 */
+    public static get AssetManager(): AssetManager {
+        return AssetManager.getInstance();
+    }
     /** 音频管理器 */
     public static get AudioManager(): AudioManager {
         return AudioManager.getInstance();

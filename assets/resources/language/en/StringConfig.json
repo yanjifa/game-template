@@ -1,7 +1,10 @@
 {
-    "TID_BTN_OK": "OK",
-    "TID_BTN_CANCEL": "CANCEL",
-    "TID_BTN_SETTING": "SETTING",
-    "TID_UI_HELLO_WORLD": "HELLO WORLD",
-    "TID_UI_MSG_TEST": "${p1} is ${p2} years old."
+    "TID_LABEL_LANGUAGE": "Language",
+    "TID_LABEL_EN": "English",
+    "TID_LABEL_ZH": "中文",
+    "TID_LABEL_OK": "OK",
+    "TID_LABEL_CANCEL": "Cancel",
+    "TID_LABEL_SETTING": "Setting",
+    "TID_LABEL_HELLO_WORLD": "hello World",
+    "TID_LABEL_TEST": "${p1} is ${p2} years old."
 }

@@ -1,5 +1,4 @@
 import Bluebird = require("bluebird");
-import * as _ from "lodash";
 import BaseSingleton from "../base/BaseSingeton";
 import { ELanguageType, ENotifyType } from "../Enum";
 import Game from "../Game";
@@ -16,13 +15,14 @@ export default class LocalizedUtil extends BaseSingleton {
     }
 
     private async loadStringConfig() {
+        const cfgPath = `language/${this.language}/StringConfig`;
         await Bluebird.fromCallback((callback) => {
-            cc.resources.load<cc.JsonAsset>(`language/${this.language}/StringConfig`, (error, asset) => {
+            cc.resources.load<cc.JsonAsset>(cfgPath, (error, asset) => {
                 this.localizeCfgs = asset.json;
                 callback(error);
             });
         });
-        cc.resources.release(`language/${this.language}/StringConfig`);
+        cc.resources.release(cfgPath);
     }
 
     public async changeLanguage(lang: ELanguageType) {
@@ -35,7 +35,7 @@ export default class LocalizedUtil extends BaseSingleton {
         const [id, ...args] = tid.split(",");
         let str = this.localizeCfgs[id];
         args.forEach((arg, index) => {
-            str = _.replace(str, "${p" + (index + 1) + "}", arg);
+            str = str.replace("${p" + (index + 1) + "}", arg);
         });
         return str;
     }

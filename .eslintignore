@@ -1,5 +1,7 @@
 creator.d.ts
 game.d.ts
 build
+temp
+library
 preview-templates/ccc-devtools/libs/js/vue*.js
 preview-templates/cocos-analytics

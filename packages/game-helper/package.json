@@ -8,8 +8,8 @@
         "i18n:MAIN_MENU.package.title/game-helper/open": {
             "message": "game-helper:open"
         },
-        "i18n:MAIN_MENU.package.title/game-helper/hello": {
-            "message": "game-helper:say-hello"
+        "i18n:MAIN_MENU.package.title/game-helper/reload": {
+            "message": "game-helper:reload"
         }
     },
     "profiles": {

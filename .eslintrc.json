@@ -8,6 +8,10 @@
 		"sourceType": "module"
 	},
 	"rules": {
+		// === or !==
+		"eqeqeq": "error",
+		// 要求 for-in 循环中有一个 if 语句
+		"guard-for-in": "error",
 		// 4 空格缩进
 		"indent": ["warn", 4],
 		// 使用双引号
