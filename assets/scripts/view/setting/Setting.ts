@@ -1,5 +1,5 @@
 import BasePopView from "../../base/BasePopView";
-import { ELanguageType, ENotifyType, EViewName } from "../../Enum";
+import { ELanguageType, EViewName } from "../../Enum";
 import Game from "../../Game";
 import { IViewData } from "../../Macro";
 

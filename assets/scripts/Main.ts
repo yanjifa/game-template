@@ -77,4 +77,8 @@ export default class Main extends cc.Component {
     private onSettingBtnClicked() {
         Game.PopViewManager.showPopView(EViewName.SETTING);
     }
+
+    private onListViewBtnClicked() {
+        Game.PopViewManager.showPopView(EViewName.LIST_VIEW_DEMO);
+    }
 }

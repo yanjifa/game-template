@@ -16,4 +16,5 @@ export enum ENotifyType {
 
 export enum EViewName {
     SETTING = "SETTING",
+    LIST_VIEW_DEMO = "LIST_VIEW_DEMO",
 }
