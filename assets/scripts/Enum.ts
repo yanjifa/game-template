@@ -4,6 +4,10 @@ export enum ELanguageType {
     ZH = "zh"
 }
 
+export enum EStorageKey {
+    LANGUAGE = "LANGUAGE",
+}
+
 export enum ENotifyType {
     LANGUAGE_CHANGED = "LANGUAGE_CHANGED",
     BLOCK_INPUT_SHOW = "BLOCK_INPUT_SHOW",
