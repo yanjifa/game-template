@@ -7,5 +7,6 @@
     "TID_LABEL_SETTING": "设置",
     "TID_LABEL_HELLO_WORLD": "你好，世界",
     "TID_LABEL_TEST": "${p1} 已经 ${p2} 岁了。",
-    "TID_LABEL_LIST_VIEW": "表视图"
+    "TID_LABEL_LIST_VIEW": "表视图",
+    "TID_LABEL_RICH_TEXT": "<color=#00ff00>富</c><color=#0fffff>文本</color>"
 }

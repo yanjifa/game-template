@@ -5,9 +5,9 @@ const {ccclass, property, executeInEditMode, menu, inspector} = cc._decorator;
 
 @ccclass
 @executeInEditMode()
-@menu("i18n:MAIN_MENU.component.renderers/LocalizedLabel")
-@inspector("packages://game-helper/inspectors/localizedlabel.js")
-export default class LocalizedLabel extends cc.Label {
+@menu("i18n:MAIN_MENU.component.renderers/LocalizedRichText")
+@inspector("packages://game-helper/inspectors/localizedrichtext.js")
+export default class LocalizedRichText extends cc.RichText {
     @property()
     private _tid = "";
     @property({
@@ -23,9 +23,9 @@ export default class LocalizedLabel extends cc.Label {
     }
 
     protected onLoad() {
-        super.onLoad();
         Game.NotifyUtil.on(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
         this.updateString();
+
     }
 
     protected onDestroy() {
@@ -49,7 +49,8 @@ export default class LocalizedLabel extends cc.Label {
                 this.string = "" + str;
             });
         } else {
-            this.string = "" + Game.LocalizeUtil.getLangStr(this._tid);
+            const str = "" + Game.LocalizeUtil.getLangStr(this._tid);
+            this.string !== str && (this.string = str);
         }
     }
 }

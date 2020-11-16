@@ -3,7 +3,7 @@ import * as _ from "lodash";
 import BaseSingleton from "../base/BaseSingeton";
 import { ENotifyType } from "../Enum";
 
-type NotifyFn = (msg: unknown, notifyType?: ENotifyType) => void;
+type NotifyFn = (userData: unknown, notifyType?: ENotifyType) => void;
 
 interface IObserver {
     func: NotifyFn;
@@ -60,15 +60,15 @@ export default class NotifyUtil extends BaseSingleton {
      *
      * @template T
      * @param notifyType
-     * @param [msg=null]
+     * @param [userData=null]
      * @memberof NotifyUtil
      */
-    public emit<T>(notifyType: ENotifyType, msg: T = null) {
+    public emit<T extends unknown>(notifyType: ENotifyType, userData: T = null) {
         this.observerMap.get(notifyType).forEach((obs: IObserver) => {
             if (obs.target) {
-                obs.func.call(obs.target, msg, notifyType);
+                obs.func.call(obs.target, userData, notifyType);
             } else {
-                obs.func(msg, notifyType);
+                obs.func(userData, notifyType);
             }
         });
     }

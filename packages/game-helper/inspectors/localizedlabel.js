@@ -17,4 +17,5 @@ Vue.component("localized-label",
         {
             T: Editor.T,
         },
-    });
+    },
+);
