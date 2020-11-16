@@ -12,6 +12,13 @@
             "message": "game-helper:reload"
         }
     },
+    "runtime-resource": {
+        "path": "component",
+        "name": "component"
+    },
+    "reload": {
+        "ignore": ["component/**/*"]
+    },
     "profiles": {
         "local": {
             "path": "assets/resources/language",
