@@ -1,4 +1,15 @@
-import { EViewName } from "./Enum";
+import { ESceneName, EViewName } from "./Enum";
+
+export interface ISceneData {
+    sceneName: ESceneName;
+    resDirs: string[];
+    prefabUrl: string;
+}
+
+export interface ISwitchSceneData {
+    from?: ESceneName;
+    to: ESceneName;
+}
 
 export interface IViewData {
     viewName: EViewName;

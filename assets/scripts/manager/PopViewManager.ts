@@ -38,7 +38,7 @@ export default class PopViewManager extends BaseSingleton {
         console.info("PopViewManager setup");
     }
 
-    public initPopViewRootNode(node: cc.Node) {
+    public setPopViewRootNode(node: cc.Node) {
         this.popViewRootNode = node;
     }
 

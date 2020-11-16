@@ -1,7 +1,6 @@
 export default class BaseSingleton {
-    public constructor() {
-        //
-    }
+
+    constructor() { /** */ }
 
     public static getInstance() {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

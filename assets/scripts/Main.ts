@@ -1,5 +1,5 @@
 import Bluebird = require("bluebird");
-import { ENotifyType, EViewName } from "./Enum";
+import { ENotifyType, ESceneName, EViewName } from "./Enum";
 import Game from "./Game";
 
 const {ccclass, property} = cc._decorator;
@@ -8,6 +8,9 @@ const TEST = true;
 
 @ccclass
 export default class Main extends cc.Component {
+    @property(cc.Node)
+    private sceneRootNode: cc.Node = null;
+
     @property(cc.Node)
     private popViewRootNode: cc.Node = null;
 
@@ -40,7 +43,15 @@ export default class Main extends cc.Component {
         await this.gameSetup();
         Game.NotifyUtil.on(ENotifyType.BLOCK_INPUT_SHOW, this.showBlockInput, this);
         Game.NotifyUtil.on(ENotifyType.BLOCK_INPUT_HIDE, this.hideBlockInput, this);
-        Game.PopViewManager.initPopViewRootNode(this.popViewRootNode);
+        //
+        Game.SceneManager.setSceneRootNode(this.sceneRootNode);
+        Game.PopViewManager.setPopViewRootNode(this.popViewRootNode);
+        // 载入 Home 场景
+        Game.SceneManager.gotoScene({
+            sceneName: ESceneName.HOME,
+            resDirs: ["home"],
+            prefabUrl: "home/prefab/Home",
+        });
     }
 
     private async gameSetup() {
@@ -72,13 +83,5 @@ export default class Main extends cc.Component {
             return;
         }
         this.blockStateLabel.string = this.blockReasons.join("\n");
-    }
-
-    private onSettingBtnClicked() {
-        Game.PopViewManager.showPopView(EViewName.SETTING);
-    }
-
-    private onListViewBtnClicked() {
-        Game.PopViewManager.showPopView(EViewName.LIST_VIEW_DEMO);
     }
 }

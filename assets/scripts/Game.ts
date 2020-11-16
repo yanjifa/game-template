@@ -1,6 +1,7 @@
 import AssetManager from "./manager/AssetManager";
 import AudioManager from "./manager/AudioManager";
 import PopViewManager from "./manager/PopViewManager";
+import SceneManager from "./manager/SceneManager";
 import GameUtil from "./util/GameUtil";
 import LocalizedUtil from "./util/LocalizedUtil";
 import NotifyUtil from "./util/NotifyUtil";
@@ -14,6 +15,10 @@ export default class Game {
     /** 音频管理器 */
     public static get AudioManager(): AudioManager {
         return AudioManager.getInstance();
+    }
+    /** 场景管理器 */
+    public static get SceneManager(): SceneManager {
+        return SceneManager.getInstance();
     }
     /** PopView 管理器 */
     public static get PopViewManager(): PopViewManager {
