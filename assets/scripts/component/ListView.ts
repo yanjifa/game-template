@@ -34,7 +34,7 @@ export default class ListView extends cc.ScrollView {
 
     @property({
         type: cc.Enum(DIRECTION),
-        tooltip: CC_DEV && " tableview 滚动方向",
+        tooltip: CC_DEV && " listview 滚动方向",
     })
     set direction(value: DIRECTION) {
         this._direction = value;
@@ -49,7 +49,7 @@ export default class ListView extends cc.ScrollView {
 
     @property({
         type: cc.Enum(LAYOUT_TYPE),
-        tooltip: CC_DEV && "滚动子节点遮挡关系",
+        tooltip: CC_DEV && "子节点布局方式",
     })
     private layoutType: number = LAYOUT_TYPE.START_TO_END;
 
@@ -59,12 +59,10 @@ export default class ListView extends cc.ScrollView {
         }
         this._enableScroll = value;
         if (this._enableScroll) {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore: Unreachable code error
+            // @ts-ignore
             this._registerEvent();
         } else {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore: Unreachable code error
+            // @ts-ignore
             this._unregisterEvent();
         }
     }
@@ -179,11 +177,9 @@ export default class ListView extends cc.ScrollView {
         this.notifyDataSetChanged();
         this.scheduleOnce(() => {
             // 手机上, setadpter 时, 如果有 scale action, 滚动条会错位, 延时一帧强刷一下
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore: Unreachable code error
+            // @ts-ignore
             this.verticalScrollBar && this.verticalScrollBar._onScroll(0);
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore: Unreachable code error
+            // @ts-ignore
             this.horizontalScrollBar && this.horizontalScrollBar._onScroll(0);
         });
     }

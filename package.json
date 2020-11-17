@@ -11,9 +11,14 @@
         "@types/bluebird": "^3.5.33"
     },
     "scripts": {
-        "lint-check": "eslint --fix-dry-run ./",
-        "lint-fix": "eslint --fix ./"
+        "tsc-check": "tsc --noEmit",
+        "lint": "eslint $(git diff --cached --name-only | grep \\.ts$)",
+        "lint-fix": "eslint --fix $(git diff --cached --name-only | grep \\.ts$)"
     },
+    "pre-commit": [
+        "tsc-check",
+        "lint"
+    ],
     "repository": {
         "type": "git",
         "url": "git+https://github.com/yanjifa/game-template.git"

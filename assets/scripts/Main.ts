@@ -1,5 +1,5 @@
 import Bluebird = require("bluebird");
-import { ENotifyType, ESceneName, EViewName } from "./Enum";
+import { ENotifyType, ESceneName } from "./Enum";
 import Game from "./Game";
 
 const {ccclass, property} = cc._decorator;
