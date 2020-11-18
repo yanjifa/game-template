@@ -1,21 +1,20 @@
-import _ = require("lodash");
+import * as _ from "lodash";
 
-const { ccclass, property, inspector } = cc._decorator;
+const { ccclass, property, inspector, menu } = cc._decorator;
 
 const EX_NUM = 1;
+
 const EPSILON = 1e-1;
 
-enum DIRECTION {
-    VERTICAL = 1,
-    HORIZONTAL = 2,
-}
 /**
- * 子节点互相间遮挡关系
+ * VERTICAL 纵向滚动
+ * HORIZONTAL 横向滚动
+ * @export
+ * @enum {number}
  */
-enum LAYOUT_TYPE {
-    START_TO_END = 1,
-    END_TO_START = 2,
-}
+export enum LISTVIEW_DIRECTION { VERTICAL = 1, HORIZONTAL }
+
+enum LAYOUT_TYPE { START_TO_END = 1, END_TO_START }
 
 export interface IListAdapter {
     /** 获取列表总条数 */
@@ -27,29 +26,30 @@ export interface IListAdapter {
 }
 
 @ccclass
+@menu(`${CC_EDITOR && Editor.T("game-helper.projectcomponent")}/ListView`)
 @inspector("packages://game-helper/inspectors/listview.js")
 export default class ListView extends cc.ScrollView {
     @property(cc.Prefab)
     private listItem: cc.Prefab = null;
 
     @property({
-        type: cc.Enum(DIRECTION),
-        tooltip: CC_DEV && " listview 滚动方向",
+        type: cc.Enum(LISTVIEW_DIRECTION),
+        tooltip: " listview 滚动方向\nVERTICAL 纵向\nHORIZONTAL 横向",
     })
-    set direction(value: DIRECTION) {
+    set direction(value: LISTVIEW_DIRECTION) {
         this._direction = value;
-        this.vertical = this._direction === DIRECTION.VERTICAL;
-        this.horizontal = this._direction === DIRECTION.HORIZONTAL;
+        this.vertical = this._direction === LISTVIEW_DIRECTION.VERTICAL;
+        this.horizontal = this._direction === LISTVIEW_DIRECTION.HORIZONTAL;
     }
     get direction() {
         return this._direction;
     }
     @property()
-    private _direction: DIRECTION = DIRECTION.VERTICAL;
+    private _direction: LISTVIEW_DIRECTION = LISTVIEW_DIRECTION.VERTICAL;
 
     @property({
         type: cc.Enum(LAYOUT_TYPE),
-        tooltip: CC_DEV && "子节点布局方式",
+        tooltip: "子节点布局方式",
     })
     private layoutType: number = LAYOUT_TYPE.START_TO_END;
 
@@ -114,17 +114,26 @@ export default class ListView extends cc.ScrollView {
     }
 
     private putItemNode(node: cc.Node) {
-        _.remove(this._items, (o) => o.node === node);
+        this._items.splice(this._items.findIndex((o) => o.node === node), 1);
         this.itemNodePool.put(node);
     }
 
     public getItemById(index: number) {
-        return _.find(this._items, (item) => item.index === index);
+        return this._items.find((item) => item.index === index);
     }
 
-    public async animtedDelOneItem(index: number, duration: number, callBack: () => void) {
+    /**
+     * 删除一个 item, 并补空位
+     *
+     * @param index
+     * @param duration
+     * @param callBack
+     * @returns {*}
+     * @memberof ListView
+     */
+    public animtedDelOneItem(index: number, duration: number, callBack: () => void): void {
         const delItem = this.getItemById(index);
-        if (_.isNil(delItem)) {
+        if (!delItem) {
             console.error("del item not show");
             return;
         }
@@ -164,6 +173,13 @@ export default class ListView extends cc.ScrollView {
         }, duration);
     }
 
+    /**
+     * 设置适配器
+     *
+     * @param adapter
+     * @param [bufferSize] 缓存池大小
+     * @memberof ListView
+     */
     public setAdapter(adapter: IListAdapter, bufferSize?: number) {
         this.adapter = adapter;
         if (bufferSize) {
@@ -184,7 +200,13 @@ export default class ListView extends cc.ScrollView {
         });
     }
 
-    public notifyDataSetChanged() {
+    /**
+     *  通知刷新数据
+     *
+     * @returns {*}
+     * @memberof ListView
+     */
+    public notifyDataSetChanged(): void {
         if (!this.adapter) {
             console.warn("please setadpter first");
             return;
@@ -193,21 +215,21 @@ export default class ListView extends cc.ScrollView {
             console.warn("activeInHierarchy is false");
         }
         if (this.adapter.getItemCount(this) <= 0) {
-            console.warn("tableview data.length <= 0");
+            console.warn("listview data.length <= 0");
         }
         const offset = this.getScrollOffset();
         // 回收
         while (this._items.length > 0) {
             this.putItemNode(this._items[0].node);
         }
-        this.itemPosList.splice(0);
-        this.itemSizeList.splice(0);
+        this.itemPosList.length = 0;
+        this.itemSizeList.length = 0;
         const count = this.adapter.getItemCount(this);
         // 计算 content size, 初始化item位置信息
         const contentSize = cc.size(
             this.vertical ? this.content.parent.width : this.paddingLeft + this.paddingRight,
             this.vertical ? this.paddingTop + this.paddingBottom : this.content.parent.height);
-        // 先 get 一个获取锚点;
+        // 先 get 一个获取锚点
         const node = this.getItemNode();
         const anchor = node.getAnchorPoint();
         this.putItemNode(node);
@@ -260,7 +282,7 @@ export default class ListView extends cc.ScrollView {
     }
 
     protected lateUpdate() {
-        if (_.isNil(this.adapter)) {
+        if (!this.adapter) {
             return;
         }
         const offset = this.getScrollOffset();
@@ -276,11 +298,11 @@ export default class ListView extends cc.ScrollView {
         if (this.vertical) {
             // 垂直滚动
             const centerPos = _.first(_.sortBy(this.itemPosList, (o) => Math.abs(o.y + offset.y + this.content.parent.height / 2)));
-            centerIndex = _.findIndex(this.itemPosList, (o) => o.y === centerPos.y);
+            centerIndex = this.itemPosList.findIndex((o) => o.y === centerPos.y);
         } else {
             // 横向滚动
             const centerPos = _.first(_.sortBy(this.itemPosList, (o) => Math.abs(o.x + offset.x - this.content.parent.width / 2)));
-            centerIndex = _.findIndex(this.itemPosList, (o) => o.x === centerPos.x);
+            centerIndex = this.itemPosList.findIndex((o) => o.x === centerPos.x);
         }
         const count = this.adapter.getItemCount(this);
         const newIndexs = [];
@@ -291,12 +313,12 @@ export default class ListView extends cc.ScrollView {
                 newIndexs.push(i);
             }
         }
-        const curIndexs = _.map(this._items, (o) => o.index);
-        const releaseIndexs = _.difference(curIndexs, newIndexs);
+        const curIndexs = this._items.map((o) => o.index);
+        const putIndexs = _.difference(curIndexs, newIndexs);
         const loadIndexs = _.difference(newIndexs, curIndexs);
         // 回收
-        for (const index of releaseIndexs) {
-            const item = _.find(this._items, (o) => o.index === index);
+        for (const index of putIndexs) {
+            const item = this._items.find((o) => o.index === index);
             this.putItemNode(item.node);
         }
         // 创建

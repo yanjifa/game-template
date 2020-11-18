@@ -28,9 +28,9 @@ module.exports = {
         const fileName = this.profiles.get("fileName");
         try {
             this.localizeCfgs = JSON.parse(fs.readFileSync(`${Editor.Project.path}/${configPath}/${lang}/${fileName}`, "utf-8"));
-            Editor.success("多语言配置加载成功:", lang);
+            Editor.success("localized config load success:", lang);
         } catch (e) {
-            Editor.warn("多语言配置加载失败:", e);
+            Editor.warn("localized config load fail:", e);
         }
     },
 

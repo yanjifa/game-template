@@ -1,6 +1,10 @@
 {
 	"env": {
-		"browser": true
+		"browser": true,
+		"node": true
+	},
+	"globals": {
+		"Editor": true
 	},
 	"extends": ["eslint:recommended"],
 	"parserOptions": {
@@ -8,32 +12,33 @@
 		"sourceType": "module"
 	},
 	"rules": {
-		// 尤达表达式
 		"yoda": "warn",
-		// parseInt
 		"radix": "error",
-		"no-multi-spaces": "warn",
-		// === or !==
+		"no-multi-spaces": ["error", {
+			"ignoreEOLComments": true,
+			"exceptions": {
+				"Property": true,
+				"VariableDeclarator": true
+			}
+		}],
+		"arrow-spacing": ["error", {
+			"before": true,
+			"after": true
+		}],
 		"eqeqeq": "error",
-		// 要求 for-in 循环中有一个 if 语句
 		"guard-for-in": "error",
-		// 使用双引号
 		"quotes": ["error", "double"],
-		// 行尾空格
 		"no-trailing-spaces": "warn",
-		// 一行最大长度
 		"max-len": ["warn", {
 			"code": 160
 		}],
 		"no-unused-vars": "warn",
 		"no-undef": "error",
-		// 冒号相关
 		"semi": ["error", "always", {
 			"omitLastInOneLineBlock": true
 		}],
 		"semi-spacing": "error",
 		"no-extra-semi": "error",
-		// 注释
 		"comma-spacing": ["warn", {
 			"before": false,
 			"after": true
@@ -59,37 +64,37 @@
 			}
 		}]
 	},
-	// 针对 typescript
-	"overrides": [
-        {
-            "files": ["*.ts"],
-            "plugins": ["@typescript-eslint"],
-            "parser": "@typescript-eslint/parser",
-			"extends": [
-				"plugin:@typescript-eslint/recommended"
-			],
-            "rules": {
-				"@typescript-eslint/no-duplicate-imports": "error",
-				"@typescript-eslint/ban-ts-comment": "off",
-				"@typescript-eslint/indent": ["warn", 4],
-                "@typescript-eslint/explicit-module-boundary-types": "off",
-                "@typescript-eslint/no-unused-vars": "off",
-                "@typescript-eslint/naming-convention": ["warn", {
-                    "selector": "typeParameter",
-                    "format": ["PascalCase"],
-                    "prefix": ["T"]
-                }, {
-                    "selector": "variable",
-                    "format": ["camelCase", "UPPER_CASE"]
-                }, {
-                    "selector": "interface",
-                    "format": ["PascalCase"],
-                    "custom": {
-                        "regex": "^I[A-Z]",
-                        "match": true
-                    }
-                }]
-            }
-        }
-    ]
+	"overrides": [{
+		"files": ["*.ts"],
+		"plugins": ["@typescript-eslint"],
+		"parser": "@typescript-eslint/parser",
+		"extends": ["plugin:@typescript-eslint/recommended"],
+		"rules": {
+			"@typescript-eslint/no-duplicate-imports": "error",
+			"@typescript-eslint/ban-ts-comment": "off",
+			"@typescript-eslint/indent": ["warn", 4],
+			"@typescript-eslint/explicit-module-boundary-types": "off",
+			"@typescript-eslint/no-unused-vars": "off",
+			"@typescript-eslint/space-before-function-paren": ["error", {
+				"anonymous": "never",
+				"named": "never",
+				"asyncArrow": "always"
+			}],
+			"@typescript-eslint/naming-convention": ["warn", {
+				"selector": "typeParameter",
+				"format": ["PascalCase"],
+				"prefix": ["T"]
+			}, {
+				"selector": "variable",
+				"format": ["camelCase", "UPPER_CASE"]
+			}, {
+				"selector": "interface",
+				"format": ["PascalCase"],
+				"custom": {
+					"regex": "^I[A-Z]",
+					"match": true
+				}
+			}]
+		}
+	}]
 }

@@ -5,7 +5,7 @@ const {ccclass, property, executeInEditMode, menu, inspector} = cc._decorator;
 
 @ccclass
 @executeInEditMode()
-@menu("i18n:MAIN_MENU.component.renderers/LocalizedRichText")
+@menu(`${CC_EDITOR && Editor.T("game-helper.projectcomponent")}/LocalizedRichText`)
 @inspector("packages://game-helper/inspectors/localizedrichtext.js")
 export default class LocalizedRichText extends cc.RichText {
     @property()

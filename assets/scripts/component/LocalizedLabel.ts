@@ -5,7 +5,7 @@ const {ccclass, property, executeInEditMode, menu, inspector} = cc._decorator;
 
 @ccclass
 @executeInEditMode()
-@menu("i18n:MAIN_MENU.component.renderers/LocalizedLabel")
+@menu(`${CC_EDITOR && Editor.T("game-helper.projectcomponent")}/LocalizedLabel`)
 @inspector("packages://game-helper/inspectors/localizedlabel.js")
 export default class LocalizedLabel extends cc.Label {
     @property()

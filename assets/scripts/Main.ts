@@ -23,12 +23,22 @@ export default class Main extends cc.Component {
     @property(cc.Label)
     private blockStateLabel: cc.Label = null;
 
+    @property(cc.Node)
+    private LoadingNode: cc.Node = null;
+
+    @property(cc.Node)
+    private loadAnimNode: cc.Node = null;
+
     private blockInputRefNum = 0;
 
     private blockReasons: string[] = [];
 
     protected onLoad() {
         window["Game"] = Game;
+        // 加载动画顶层遮罩
+        this.LoadingNode.active = true;
+        cc.tween(this.loadAnimNode).by(0.1, { angle: -40 }).repeatForever().start();
+        //
         this.updateBlockInput();
         this.blockRedDot.active = TEST;
         this.blockStateLabel.node.active = TEST;
@@ -47,11 +57,15 @@ export default class Main extends cc.Component {
         Game.SceneManager.setSceneRootNode(this.sceneRootNode);
         Game.PopViewManager.setPopViewRootNode(this.popViewRootNode);
         // 载入 Home 场景
-        Game.SceneManager.gotoScene({
+        await Game.SceneManager.gotoScene({
             sceneName: ESceneName.HOME,
             resDirs: ["home"],
             prefabUrl: "home/prefab/Home",
         });
+        cc.tween(this.LoadingNode)
+            .to(0.2, { opacity: 0 })
+            .call(() => this.LoadingNode.active = false)
+            .start();
     }
 
     private async gameSetup() {

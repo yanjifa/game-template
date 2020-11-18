@@ -1,5 +1,6 @@
 creator.d.ts
 game.d.ts
+node_modules
 build
 temp
 library
