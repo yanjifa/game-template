@@ -1,0 +1,19 @@
+{
+  "user": {
+    "name": "User",
+    "prefab": [
+      {
+        "name": "ListView",
+        "uuid": "2f8771db-2134-4c61-b657-66e613a0ba3b"
+      },
+      {
+        "name": "LocalizedLabel",
+        "uuid": "01171705-51f5-447d-81ef-e6e63878546e"
+      },
+      {
+        "name": "LocalizedRichText",
+        "uuid": "c4c66ffe-bbcb-4d75-a72c-73e665b6695d"
+      }
+    ]
+  }
+}

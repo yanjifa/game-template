@@ -4,8 +4,10 @@
 
 /library/
 /temp/
-/local/
 /build/
+/local/layout.editor.json
+/local/local.json
+/local/node-tree-state.json
 
 #/////////////////////////////////////////////////////////////////////////////
 # npm files
