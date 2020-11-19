@@ -5,14 +5,20 @@ import { ENotifyType } from "../Enum";
 import Game from "../Game";
 import { ISceneData } from "../Macro";
 
+/**
+ * 场景管理器
+ *
+ * @export
+ * @class SceneManager
+ */
 export default class SceneManager extends BaseSingleton {
-
+    /** 场景根节点 */
     private sceneRootNode: cc.Node = null;
-
+    /** 当前运行的场景数据 */
     private currentSceneData: ISceneData = null;
-
+    /** 正在前往的场景数据 */
     private goingSceneData: ISceneData = null;
-
+    /** 当前运行的尝试实例 */
     private currentScene: BaseScene = null;
 
     public async setup() {
@@ -23,7 +29,15 @@ export default class SceneManager extends BaseSingleton {
         this.sceneRootNode = node;
     }
 
-    public async gotoScene(sceneData: ISceneData, userData?: Record<string, unknown>) {
+    /**
+     * 切换场景
+     *
+     * @param sceneData
+     * @param [userData]
+     * @returns {*}
+     * @memberof SceneManager
+     */
+    public async gotoScene(sceneData: ISceneData, userData?: Record<string, unknown>): Promise<void> {
         if (this.goingSceneData) {
             console.error(`scene [${this.goingSceneData.sceneName}] is going now`);
             return;

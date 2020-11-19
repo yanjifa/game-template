@@ -39,6 +39,9 @@ export default class LocalizedUtil extends BaseSingleton {
      * @memberof LocalizedUtil
      */
     public async changeLanguage(lang: ELanguageType) {
+        if (this.language === lang) {
+            return;
+        }
         this.language = lang;
         Game.StorageUtil.write(EStorageKey.LANGUAGE, this.language);
         await this.loadStringConfig();

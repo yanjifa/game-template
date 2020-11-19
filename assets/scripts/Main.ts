@@ -1,4 +1,3 @@
-import Bluebird = require("bluebird");
 import { ENotifyType, ESceneName } from "./Enum";
 import Game from "./Game";
 

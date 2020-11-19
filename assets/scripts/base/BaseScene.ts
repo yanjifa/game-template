@@ -2,6 +2,12 @@ import { ESceneName } from "../Enum";
 
 const { ccclass } = cc._decorator;
 
+/**
+ * 场景基类
+ *
+ * @export
+ * @class BaseScene
+ */
 @ccclass
 export default class BaseScene extends cc.Component {
 

@@ -3,6 +3,12 @@ import { EStorageKey } from "../Enum";
 
 const STORAGE_PREFIX = "GAME";
 
+/**
+ * 客户端存档工具
+ *
+ * @export
+ * @class StorageUtil
+ */
 export default class StorageUtil extends BaseSingleton {
 
     private storageMap: Map<string, unknown> = new Map();

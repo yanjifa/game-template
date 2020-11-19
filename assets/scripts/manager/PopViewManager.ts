@@ -14,6 +14,12 @@ interface ICreateQueue {
     userData: Record<string, unknown>;
 }
 
+/**
+ * popview 管理器, 注册 view, 显示 view
+ *
+ * @export
+ * @class PopViewManager
+ */
 export default class PopViewManager extends BaseSingleton {
 
     get fullScreenViewRefNum() {

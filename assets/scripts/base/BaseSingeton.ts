@@ -1,3 +1,9 @@
+/**
+ * 单例基类, 没什么太大用途
+ *
+ * @export
+ * @class BaseSingleton
+ */
 export default class BaseSingleton {
 
     constructor() { /** */ }

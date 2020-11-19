@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import * as _ from "lodash";
 import BaseSingleton from "../base/BaseSingeton";
 import { ENotifyType } from "../Enum";
@@ -7,15 +6,22 @@ type NotifyFn = (userData: unknown, notifyType?: ENotifyType) => void;
 
 interface IObserver {
     func: NotifyFn;
-    target: object;
+    target: unknown;
 }
 
+/**
+ * 全局事件
+ *
+ * @export
+ * @class NotifyUtil
+ */
 export default class NotifyUtil extends BaseSingleton {
 
     private observerMap: Map<ENotifyType, IObserver[]> = new Map();
 
     private constructor() {
         super();
+        // 检查 ENotifyType 拼写, 并初始化 observerMap
         for (const key in ENotifyType) {
             if (Object.prototype.hasOwnProperty.call(ENotifyType, key)) {
                 const notifyName = ENotifyType[key];
@@ -39,7 +45,7 @@ export default class NotifyUtil extends BaseSingleton {
      * @param target
      * @memberof NotifyUtil
      */
-    public on(notifyType: ENotifyType, notifyFunc: NotifyFn, target: object) {
+    public on(notifyType: ENotifyType, notifyFunc: NotifyFn, target: unknown) {
         this.observerMap.get(notifyType).push({ func: notifyFunc, target: target });
     }
 
@@ -51,7 +57,7 @@ export default class NotifyUtil extends BaseSingleton {
      * @param target
      * @memberof NotifyUtil
      */
-    public off(notifyType: ENotifyType, notifyFunc: NotifyFn, target: object) {
+    public off(notifyType: ENotifyType, notifyFunc: NotifyFn, target: unknown) {
         _.remove(this.observerMap.get(notifyType), (o) => o.func === notifyFunc && o.target === target);
     }
 

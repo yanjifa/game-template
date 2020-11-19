@@ -281,7 +281,14 @@ export default class ListView extends cc.ScrollView {
         return this.itemPosList[index];
     }
 
-    protected lateUpdate() {
+    /**
+     * 每帧刷新位置, 回收、复用
+     *
+     * @protected
+     * @returns {*}
+     * @memberof ListView
+     */
+    protected lateUpdate(): void {
         if (!this.adapter) {
             return;
         }

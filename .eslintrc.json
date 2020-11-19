@@ -96,5 +96,13 @@
 				}
 			}]
 		}
+	},
+	{
+		"files": ["assets/scripts/Enum.ts"],
+		"rules": {
+			"line-comment-position": ["warn", {
+				"position": "beside"
+			}]
+		}
 	}]
 }

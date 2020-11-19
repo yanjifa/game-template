@@ -5,6 +5,13 @@ import { IViewData } from "../Macro";
 
 const { ccclass, property } = cc._decorator;
 
+/**
+ * popview 基类
+ *
+ * @export
+ * @abstract
+ * @class BasePopView
+ */
 @ccclass
 export default abstract class BasePopView extends cc.Component {
     @property({

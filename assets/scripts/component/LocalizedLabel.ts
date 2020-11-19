@@ -33,11 +33,24 @@ export default class LocalizedLabel extends cc.Label {
         super.onDestroy();
     }
 
+    /**
+     * 收到语言变更通知
+     *
+     * @private
+     * @memberof LocalizedLabel
+     */
     private onLanguageChanged() {
         this.updateString();
     }
 
-    private updateString() {
+    /**
+     * 更新文本
+     *
+     * @private
+     * @returns {*}
+     * @memberof LocalizedLabel
+     */
+    private updateString(): void {
         if (!this._tid) {
             return;
         }
