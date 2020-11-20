@@ -13,9 +13,5 @@ Vue.component("localizedrichtext",
             target: { twoWay: true, type: Object },
             multi: { type: Boolean },
         },
-        methods:
-        {
-            T: Editor.T,
-        },
     },
 );
