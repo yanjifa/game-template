@@ -11,25 +11,32 @@ export default class LocalizedUtil extends BaseSingleton {
 
     public async setup() {
         this.language = Game.StorageUtil.read(EStorageKey.LANGUAGE, cc.sys.language) as ELanguageType;
-        this.loadStringConfig();
-        console.info("LocalizedUtil setup");
+        await this.loadLanguageDir(this.language);
+        console.log("LocalizedUtil setup");
     }
 
     /**
-     * 动态加载多语言配置
+     * 动态加载语言包
      *
      * @private
+     * @param lang
      * @memberof LocalizedUtil
      */
-    private async loadStringConfig() {
-        const cfgPath = `language/${this.language}/StringConfig`;
-        await Bluebird.fromCallback((callback) => {
-            cc.resources.load<cc.JsonAsset>(cfgPath, (error, asset) => {
-                this.localizeCfgs = asset.json;
-                callback(error);
-            });
-        });
-        cc.resources.release(cfgPath);
+    private async loadLanguageDir(lang: string) {
+        await Game.AssetManager.loadDir(`language/${lang}`);
+        const cfgPath = `language/${lang}/StringConfig`;
+        this.localizeCfgs = cc.resources.get<cc.JsonAsset>(cfgPath, cc.JsonAsset).json;
+    }
+
+    /**
+     * 释放语言包
+     *
+     * @private
+     * @param lang
+     * @memberof LocalizedUtil
+     */
+    private async releaseLanguageDir(lang: string) {
+        Game.AssetManager.releaseDir(`language/${lang}`);
     }
 
     /**
@@ -42,10 +49,13 @@ export default class LocalizedUtil extends BaseSingleton {
         if (this.language === lang) {
             return;
         }
-        this.language = lang;
-        Game.StorageUtil.write(EStorageKey.LANGUAGE, this.language);
-        await this.loadStringConfig();
+        Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_SHOW, "changeLanguage");
+        Game.StorageUtil.write(EStorageKey.LANGUAGE, lang);
+        await this.loadLanguageDir(lang);
         Game.NotifyUtil.emit(ENotifyType.LANGUAGE_CHANGED);
+        this.releaseLanguageDir(this.language);
+        this.language = lang;
+        Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_HIDE, "changeLanguage");
     }
 
     /**

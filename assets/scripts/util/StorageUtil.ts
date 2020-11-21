@@ -14,7 +14,7 @@ export default class StorageUtil extends BaseSingleton {
     private storageMap: Map<string, unknown> = new Map();
 
     public async setup() {
-        console.info("StorageUtil setup");
+        console.log("StorageUtil setup");
     }
 
     /**
@@ -47,11 +47,11 @@ export default class StorageUtil extends BaseSingleton {
      * @returns {*}
      * @memberof StorageUtil
      */
-    public read(key: EStorageKey, value?: unknown): unknown {
+    public read<T>(key: EStorageKey, value?: T): T {
         let result = value;
         const realKey = this.getKey(key);
         if (this.storageMap.has(realKey)) {
-            return this.storageMap.get(realKey);
+            return this.storageMap.get(realKey) as T;
         }
         const userData = JSON.parse(cc.sys.localStorage.getItem(realKey));
         if (userData !== null) {
@@ -68,7 +68,7 @@ export default class StorageUtil extends BaseSingleton {
      * @param value
      * @memberof StorageUtil
      */
-    public write(key: EStorageKey, value: unknown) {
+    public write<T>(key: EStorageKey, value: T) {
         const realKey = this.getKey(key);
         this.storageMap.set(realKey, value);
         cc.sys.localStorage.setItem(realKey, JSON.stringify(value));

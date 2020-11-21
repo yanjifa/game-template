@@ -8,7 +8,7 @@ import BaseSingleton from "../base/BaseSingeton";
  */
 export default class AudioManager extends BaseSingleton {
     public async setup() {
-        console.info("AudioManager setup");
+        console.log("AudioManager setup");
     }
 
     public playMusic(url: string) {

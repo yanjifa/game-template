@@ -6,6 +6,7 @@
     "TID_LABEL_CANCEL": "Cancel",
     "TID_LABEL_SETTING": "Setting",
     "TID_LABEL_HELLO_WORLD": "hello World",
+    "TID_LABEL_BMFONT": "BitMap Font",
     "TID_LABEL_TEST": "${p1} is ${p2} years old.",
     "TID_LABEL_LIST_VIEW": "List View",
     "TID_LABEL_RICH_TEXT": "<color=#00ff00>Rich</c><color=#0fffff>Text</color>"

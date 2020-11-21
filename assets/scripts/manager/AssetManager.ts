@@ -12,7 +12,7 @@ export default class AssetManager extends BaseSingleton {
     private loadedResDirMap: Map<string, number> = new Map();
 
     public async setup() {
-        console.info("AssetManager setup");
+        console.log("AssetManager setup");
     }
 
     /**
@@ -47,7 +47,7 @@ export default class AssetManager extends BaseSingleton {
         let refNum = this.loadedResDirMap.get(path) || 0;
         if (refNum > 0) {
             this.loadedResDirMap.set(path, ++refNum);
-            console.info(`AssetManager already loaded: ${path}`);
+            console.log(`AssetManager already loaded: ${path}`);
             return;
         }
         this.loadedResDirMap.set(path, ++refNum);
@@ -56,7 +56,7 @@ export default class AssetManager extends BaseSingleton {
                 progressCallback && progressCallback(finish / total);
             }, callback);
         });
-        console.info(`AssetManager loadDir: ${path}`);
+        console.log(`AssetManager loadDir: ${path}`);
     }
 
     /**
@@ -86,7 +86,7 @@ export default class AssetManager extends BaseSingleton {
             return;
         }
         cc.resources.release(path);
-        console.info(`AssetManager releaseDir: ${path}`);
+        console.log(`AssetManager releaseDir: ${path}`);
     }
 
     /**

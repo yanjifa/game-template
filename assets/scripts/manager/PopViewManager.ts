@@ -41,7 +41,7 @@ export default class PopViewManager extends BaseSingleton {
     private isCreatingPopView = false;
 
     public async setup() {
-        console.info("PopViewManager setup");
+        console.log("PopViewManager setup");
     }
 
     public setPopViewRootNode(node: cc.Node) {
@@ -92,7 +92,7 @@ export default class PopViewManager extends BaseSingleton {
         const curTopView = this.createdPopViews[this.createdPopViews.length - 1];
         if (curTopView) {
             curTopView.onLostFocus();
-            console.info(`view: ${viewData.viewName} onLostFocus`);
+            console.log(`view: ${viewData.viewName} onLostFocus`);
         }
 
         this.createdPopViews.push(popView);
@@ -114,7 +114,7 @@ export default class PopViewManager extends BaseSingleton {
         if (isTopView && this.createdPopViews.length > 0) {
             const curTopView = this.createdPopViews[this.createdPopViews.length - 1];
             curTopView.onFocus();
-            console.info(`view: ${viewData.viewName} onFocus`);
+            console.log(`view: ${viewData.viewName} onFocus`);
         }
         Game.AssetManager.releaseDirs(viewData.resDirs);
     }

@@ -34,7 +34,7 @@ export default class NotifyUtil extends BaseSingleton {
     }
 
     public async setup() {
-        console.info("NotifyUtil setup");
+        console.log("NotifyUtil setup");
     }
 
     /**

@@ -1,4 +1,4 @@
-import { ENotifyType } from "../Enum";
+import { ENotifyType, EStorageKey } from "../Enum";
 import Game from "../Game";
 
 const {ccclass, property, executeInEditMode, menu, inspector} = cc._decorator;
@@ -20,6 +20,18 @@ export default class LocalizedLabel extends cc.Label {
     }
     get tid() {
         return this._tid;
+    }
+    @property()
+    private _bmfontUrl = "";
+    @property({
+        tooltip: "动态加载 bmfonturl",
+    })
+    set bmfontUrl(value: string) {
+        this._bmfontUrl = value;
+        this.updateString();
+    }
+    get bmfontUrl() {
+        return this._bmfontUrl;
     }
 
     protected onLoad() {
@@ -63,6 +75,10 @@ export default class LocalizedLabel extends cc.Label {
             });
         } else {
             this.string = "" + Game.LocalizeUtil.getLangStr(this._tid);
+            if (this._bmfontUrl) {
+                const lang = Game.StorageUtil.read(EStorageKey.LANGUAGE, cc.sys.language);
+                this.font = cc.resources.get<cc.BitmapFont>(this._bmfontUrl.replace("${lang}", lang), cc.BitmapFont);
+            }
         }
     }
 }

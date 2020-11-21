@@ -22,7 +22,7 @@ export default class SceneManager extends BaseSingleton {
     private currentScene: BaseScene = null;
 
     public async setup() {
-        console.info("SceneManager setup");
+        console.log("SceneManager setup");
     }
 
     public setSceneRootNode(node: cc.Node) {

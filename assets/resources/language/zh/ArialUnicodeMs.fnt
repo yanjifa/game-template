@@ -1,0 +1,8 @@
+info face="Arial Unicode MS" size=64 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=2,2
+common lineHeight=86 base=68 scaleW=209 scaleH=137 pages=1 packed=0
+page id=0 file="ArialUnicodeMs.png"
+chars count=4
+char id=20301  x=72    y=2     width=66    height=66    xoffset=3     yoffset=8     xadvance=64    page=0  chnl=0  letter="位"
+char id=20307  x=2     y=2     width=68    height=66    xoffset=2     yoffset=7     xadvance=64    page=0  chnl=0  letter="体"
+char id=22270  x=2     y=70    width=57    height=63    xoffset=7     yoffset=10    xadvance=64    page=0  chnl=0  letter="图"
+char id=23383  x=140   y=2     width=62    height=66    xoffset=6     yoffset=7     xadvance=64    page=0  chnl=0  letter="字"
