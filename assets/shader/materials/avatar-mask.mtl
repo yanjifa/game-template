@@ -1,0 +1,17 @@
+{
+  "__type__": "cc.Material",
+  "_name": "avatarmask",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "ad0db3a0-756c-4595-80aa-9056025113eb"
+  },
+  "_techniqueIndex": 0,
+  "_techniqueData": {
+    "0": {
+      "defines": {
+        "USE_TEXTURE": true
+      }
+    }
+  }
+}

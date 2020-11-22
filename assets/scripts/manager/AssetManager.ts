@@ -65,7 +65,7 @@ export default class AssetManager extends BaseSingleton {
      * @param paths
      * @memberof AssetManager
      */
-    public releaseDirs(paths: string[]) {
+    public releaseDirs(paths: string[]): void {
         paths.forEach((path) => this.releaseDir(path));
     }
 
@@ -76,7 +76,7 @@ export default class AssetManager extends BaseSingleton {
      * @returns {*}
      * @memberof AssetManager
      */
-    public releaseDir(path: string) {
+    public releaseDir(path: string): void {
         let refNum = this.loadedResDirMap.get(path);
         if (refNum === null && refNum === undefined) {
             return;
@@ -96,7 +96,7 @@ export default class AssetManager extends BaseSingleton {
      * @returns {*}
      * @memberof AssetManager
      */
-    public isDirLoaded(path: string) {
+    public isDirLoaded(path: string): boolean {
         return this.loadedResDirMap.get(path) > 0;
     }
 

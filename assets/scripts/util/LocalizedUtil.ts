@@ -1,4 +1,3 @@
-import Bluebird = require("bluebird");
 import BaseSingleton from "../base/BaseSingeton";
 import { ELanguageType, ENotifyType, EStorageKey } from "../Enum";
 import Game from "../Game";
@@ -10,7 +9,8 @@ export default class LocalizedUtil extends BaseSingleton {
     private language: ELanguageType = null;
 
     public async setup() {
-        this.language = Game.StorageUtil.read(EStorageKey.LANGUAGE, cc.sys.language) as ELanguageType;
+        const defaultLang = ELanguageType[cc.sys.language.toUpperCase()] || ELanguageType.EN;
+        this.language = Game.StorageUtil.read(EStorageKey.LANGUAGE, defaultLang) as ELanguageType;
         await this.loadLanguageDir(this.language);
         console.log("LocalizedUtil setup");
     }
