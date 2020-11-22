@@ -1,109 +1,174 @@
 {
-	"env": {
-		"browser": true,
-		"node": true
-	},
-	"globals": {
-		"Editor": true,
-		"Vue": true
-	},
-	"extends": ["eslint:recommended"],
-	"parserOptions": {
-		"ecmaVersion": 12,
-		"sourceType": "module"
-	},
-	"rules": {
-		"yoda": "warn",
-		"radix": "error",
-		"no-multi-spaces": ["error", {
-			"ignoreEOLComments": true,
-			"exceptions": {
-				"Property": true,
-				"VariableDeclarator": true
-			}
-		}],
-		"arrow-spacing": ["error", {
-			"before": true,
-			"after": true
-		}],
-		"eqeqeq": "error",
-		"guard-for-in": "error",
-		"quotes": ["error", "double"],
-		"no-trailing-spaces": "warn",
-		"max-len": ["warn", {
-			"code": 160
-		}],
-		"no-unused-vars": "warn",
-		"no-undef": "error",
-		"semi": ["error", "always", {
-			"omitLastInOneLineBlock": true
-		}],
-		"semi-spacing": "error",
-		"no-extra-semi": "error",
-		"comma-spacing": ["warn", {
-			"before": false,
-			"after": true
-		}],
-		"comma-dangle": ["error", "always-multiline"],
-		"no-multiple-empty-lines": ["error", {
-			"max": 2,
-			"maxEOF": 1,
-			"maxBOF": 1
-		}],
-		"line-comment-position": ["warn", {
-			"position": "above"
-		}],
-		"spaced-comment": ["error", "always", {
-			"line": {
-				"markers": ["/"],
-				"exceptions": ["-", "+"]
-			},
-			"block": {
-				"markers": ["!"],
-				"exceptions": ["*"],
-				"balanced": true
-			}
-		}]
-	},
-	"overrides": [{
-		"files": ["*.ts"],
-		"plugins": ["@typescript-eslint"],
-		"parser": "@typescript-eslint/parser",
-		"extends": ["plugin:@typescript-eslint/recommended"],
-		"rules": {
-			"@typescript-eslint/no-duplicate-imports": "error",
-			"@typescript-eslint/ban-ts-comment": "off",
-			"@typescript-eslint/indent": ["warn", 4],
-			"@typescript-eslint/explicit-module-boundary-types": "off",
-			"@typescript-eslint/no-unused-vars": "off",
-			"@typescript-eslint/space-before-function-paren": ["error", {
-				"anonymous": "never",
-				"named": "never",
-				"asyncArrow": "always"
-			}],
-			"@typescript-eslint/naming-convention": ["warn", {
-				"selector": "typeParameter",
-				"format": ["PascalCase"],
-				"prefix": ["T"]
-			}, {
-				"selector": "variable",
-				"format": ["camelCase", "UPPER_CASE"]
-			}, {
-				"selector": "interface",
-				"format": ["PascalCase"],
-				"custom": {
-					"regex": "^I[A-Z]",
-					"match": true
-				}
-			}]
-		}
-	},
-	{
-		"files": ["assets/scripts/Enum.ts"],
-		"rules": {
-			"line-comment-position": ["warn", {
-				"position": "beside"
-			}]
-		}
-	}]
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "globals": {
+        "Editor": true,
+        "Vue": true
+    },
+    "extends": [
+        "eslint:recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "rules": {
+        "yoda": "warn",
+        "radix": "error",
+        "no-multi-spaces": [
+            "error",
+            {
+                "ignoreEOLComments": true,
+                "exceptions": {
+                    "Property": true,
+                    "VariableDeclarator": true
+                }
+            }
+        ],
+        "arrow-spacing": [
+            "error",
+            {
+                "before": true,
+                "after": true
+            }
+        ],
+        "eqeqeq": "error",
+        "guard-for-in": "error",
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "no-trailing-spaces": "warn",
+        "max-len": [
+            "warn",
+            {
+                "code": 160
+            }
+        ],
+        "no-unused-vars": "warn",
+        "no-undef": "error",
+        "semi": [
+            "error",
+            "always",
+            {
+                "omitLastInOneLineBlock": true
+            }
+        ],
+        "semi-spacing": "error",
+        "no-extra-semi": "error",
+        "comma-spacing": [
+            "warn",
+            {
+                "before": false,
+                "after": true
+            }
+        ],
+        "comma-dangle": [
+            "error",
+            "always-multiline"
+        ],
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 2,
+                "maxEOF": 1,
+                "maxBOF": 1
+            }
+        ],
+        "line-comment-position": [
+            "warn",
+            {
+                "position": "above"
+            }
+        ],
+        "spaced-comment": [
+            "error",
+            "always",
+            {
+                "line": {
+                    "markers": ["/"],
+                    "exceptions": ["-", "+"]
+                },
+                "block": {
+                    "markers": ["!"],
+                    "exceptions": ["*"],
+                    "balanced": true
+                }
+            }
+        ]
+    },
+    "overrides": [
+        {
+            "files": [
+                "*.ts"
+            ],
+            "plugins": [
+                "@typescript-eslint"
+            ],
+            "parser": "@typescript-eslint/parser",
+            "extends": [
+                "plugin:@typescript-eslint/recommended"
+            ],
+            "rules": {
+                "@typescript-eslint/no-duplicate-imports": "error",
+                "@typescript-eslint/ban-ts-comment": "off",
+                "@typescript-eslint/indent": [
+                    "warn",
+                    4
+                ],
+                "@typescript-eslint/explicit-module-boundary-types": "off",
+                "@typescript-eslint/no-unused-vars": "off",
+                "@typescript-eslint/space-before-function-paren": [
+                    "error",
+                    {
+                        "anonymous": "never",
+                        "named": "never",
+                        "asyncArrow": "always"
+                    }
+                ],
+                "@typescript-eslint/naming-convention": [
+                    "warn",
+                    {
+                        "selector": "typeParameter",
+                        "format": [
+                            "PascalCase"
+                        ],
+                        "prefix": ["T"]
+                    },
+                    {
+                        "selector": "variable",
+                        "format": [
+                            "camelCase",
+                            "UPPER_CASE"
+                        ]
+                    },
+                    {
+                        "selector": "interface",
+                        "format": [
+                            "PascalCase"
+                        ],
+                        "custom": {
+                            "regex": "^I[A-Z]",
+                            "match": true
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "files": [
+                "assets/scripts/Enum.ts"
+            ],
+            "rules": {
+                "line-comment-position": [
+                    "warn",
+                    {
+                        "position": "beside"
+                    }
+                ]
+            }
+        }
+    ]
 }

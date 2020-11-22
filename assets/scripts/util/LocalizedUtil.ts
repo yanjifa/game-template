@@ -6,12 +6,21 @@ export default class LocalizedUtil extends BaseSingleton {
 
     private localizeCfgs: Record<string, string> = {};
 
-    private language: ELanguageType = null;
+    /**
+     * 获取当前语言
+     *
+     * @readonly
+     * @memberof LocalizedUtil
+     */
+    get language() {
+        return this._language;
+    }
+    private _language: ELanguageType = null;
 
     public async setup() {
         const defaultLang = ELanguageType[cc.sys.language.toUpperCase()] || ELanguageType.EN;
-        this.language = Game.StorageUtil.read(EStorageKey.LANGUAGE, defaultLang) as ELanguageType;
-        await this.loadLanguageDir(this.language);
+        this._language = Game.StorageUtil.read(EStorageKey.LANGUAGE, defaultLang) as ELanguageType;
+        await this.loadLanguageDir(this._language);
         console.log("LocalizedUtil setup");
     }
 
@@ -46,15 +55,16 @@ export default class LocalizedUtil extends BaseSingleton {
      * @memberof LocalizedUtil
      */
     public async changeLanguage(lang: ELanguageType) {
-        if (this.language === lang) {
+        if (this._language === lang) {
             return;
         }
+        const orginLang = this._language;
+        this._language = lang;
         Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_SHOW, "changeLanguage");
         Game.StorageUtil.write(EStorageKey.LANGUAGE, lang);
         await this.loadLanguageDir(lang);
         Game.NotifyUtil.emit(ENotifyType.LANGUAGE_CHANGED);
-        this.releaseLanguageDir(this.language);
-        this.language = lang;
+        this.releaseLanguageDir(orginLang);
         Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_HIDE, "changeLanguage");
     }
 

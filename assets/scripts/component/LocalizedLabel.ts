@@ -1,4 +1,4 @@
-import { ENotifyType, EStorageKey } from "../Enum";
+import { ENotifyType } from "../Enum";
 import Game from "../Game";
 
 const {ccclass, property, executeInEditMode, menu, inspector} = cc._decorator;
@@ -67,6 +67,7 @@ export default class LocalizedLabel extends cc.Label {
             return;
         }
         if (CC_EDITOR) {
+            // 编辑器模式下, 从插件中获取文本
             Editor.Ipc.sendToMain("game-helper:getLangStr", this._tid, (e: Error, str: string) => {
                 if (e) {
                     return;
@@ -74,9 +75,12 @@ export default class LocalizedLabel extends cc.Label {
                 this.string = "" + str;
             });
         } else {
+            // 获取多语言文本
             this.string = "" + Game.LocalizeUtil.getLangStr(this._tid);
+            // 如果使用了 bmfont, 切换对应语言的 bmfont
+            // _bmfontUrl 为自动生成, 一般情况下不需要手动维护
             if (this._bmfontUrl) {
-                const lang = Game.StorageUtil.read(EStorageKey.LANGUAGE, cc.sys.language);
+                const lang = Game.LocalizeUtil.language;
                 this.font = cc.resources.get<cc.BitmapFont>(this._bmfontUrl.replace("${lang}", lang), cc.BitmapFont);
             }
         }
