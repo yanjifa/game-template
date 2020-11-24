@@ -5,7 +5,8 @@
     },
     "globals": {
         "Editor": true,
-        "Vue": true
+        "Vue": true,
+        "cc": true
     },
     "extends": [
         "eslint:recommended"

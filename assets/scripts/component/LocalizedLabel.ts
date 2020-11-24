@@ -23,9 +23,7 @@ export default class LocalizedLabel extends cc.Label {
     }
     @property()
     private _bmfontUrl = "";
-    @property({
-        tooltip: "动态加载 bmfonturl",
-    })
+    @property()
     set bmfontUrl(value: string) {
         this._bmfontUrl = value;
         this.updateString();
@@ -78,8 +76,7 @@ export default class LocalizedLabel extends cc.Label {
             // 获取多语言文本
             this.string = "" + Game.LocalizeUtil.getLangStr(this._tid);
             // 如果使用了 bmfont, 切换对应语言的 bmfont
-            // _bmfontUrl 为自动生成, 一般情况下不需要手动维护
-            if (this._bmfontUrl) {
+            if (!this.useSystemFont && this._bmfontUrl) {
                 const lang = Game.LocalizeUtil.language;
                 this.font = cc.resources.get<cc.BitmapFont>(this._bmfontUrl.replace("${lang}", lang), cc.BitmapFont);
             }

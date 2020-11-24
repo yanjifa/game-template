@@ -1,4 +1,5 @@
 /* eslint-disable line-comment-position */
+/* eslint-disable no-useless-escape */
 "use strict";
 Vue.component("localized-label",
     {
@@ -8,11 +9,10 @@ Vue.component("localized-label",
                 v-prop="target.tid"
                 :multi-values="multi"
             ></ui-prop>
-            <ui-prop
-                v-prop="target.bmfontUrl"
-                :multi-values="multi"
-                v-show="_isBMFont()"
-            ></ui-prop>
+            <ui-prop name="BMFontUrl" tooltip="{{T(\'game-helper.localizedlabel\')}}" v-show="_isBMFont()">
+                <ui-input class="flex-1" v-value="target.bmfontUrl.value" readonly></ui-input>
+                <ui-button class="blue tiny" @confirm="_syncFontUrl">{{T(\"game-helper.updateurl\")}}</ui-button>
+            </ui-prop>
             <ui-prop
                 v-prop="target.string"
                 :multi-values="multi"
@@ -116,11 +116,18 @@ Vue.component("localized-label",
                     const fontUuid = this.target.font.value.uuid;
                     let url = Editor.remote.assetdb.uuidToUrl(fontUuid); // db://assets/resources/language/zh/myFont.fnt
                     if (url) {
-                        url = url.replace("db://assets/resources/", ""); // language/zh/myFont.fnt
-                        url = url.replace(".fnt", ""); // language/zh/myFont
-                        const arr = url.split("/");
-                        arr[arr.length - 2] = "${lang}";
-                        url = arr.join("/"); // language/${lang}/myFont
+                        if (!url.startsWith("db://assets/resources/language")) {
+                            Editor.error(`${url} -> not in language path`);
+                            url = "";
+                        } else {
+                            url = url.replace("db://assets/resources/", ""); // language/zh/myFont.fnt
+                            url = url.slice(0, url.lastIndexOf(".")); // language/zh/myFont
+                            const arr = url.split("/");
+                            arr.forEach((o, i) => {
+                                ["zh", "en"].includes(o) && (arr[i] = "${lang}");
+                            });
+                            url = arr.join("/"); // language/${lang}/myFont
+                        }
                     } else {
                         url = "";
                     }
