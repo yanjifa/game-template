@@ -47,10 +47,10 @@ export default class LocalizedSprite extends cc.Sprite {
      * @memberof LocalizedLabel
      */
     private updateSpriteFrame(): void {
-        if (!this._spriteUrl) {
+        if (CC_EDITOR) {
             return;
         }
-        if (CC_EDITOR) {
+        if (!this._spriteUrl) {
             return;
         }
         if (this._spriteUrl) {

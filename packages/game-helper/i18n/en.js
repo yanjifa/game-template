@@ -3,4 +3,5 @@ module.exports = {
     "updateurl": "Update Url",
     "localizedlabel": "bmfont url",
     "localizedsprite": "sprite url",
+    "createcomp": "Project Component",
 };
