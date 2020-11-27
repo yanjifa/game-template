@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-useless-escape */
 "use strict";
-Vue.component("cc-sprite",
+Vue.component("localizedsprite",
     {
         dependencies: ["packages://inspector/share/blend.js"],
         template: `
@@ -84,7 +84,7 @@ Vue.component("cc-sprite",
             target: { twoWay: !0, type: Object }, multi: { twoWay: !0, type: Boolean },
         },
         data: () => ({ atlasUuid: "", atlasUuids: "", atlasMulti: !1, spriteUuid: "", spriteUuids: "", spriteMulti: !1 }),
-        created() { this.target && (this._updateAtlas(), this._updateSprite(), this._updateSpriteUrl()) },
+        created() { this.target && (this._updateAtlas(), this._updateSprite()) },
         watch: { target() { this._updateAtlas(), this._updateSprite(), this._updateSpriteUrl() } },
         methods: {
             T: Editor.T,
