@@ -71,7 +71,7 @@ export default class StorageUtil extends BaseSingleton {
     public write<T>(key: EStorageKey, value: T) {
         const realKey = this.getKey(key);
         this.storageMap.set(realKey, value);
-        cc.sys.localStorage.setItem(realKey, JSON.stringify(value));
+        cc.sys.localStorage.setItem(realKey, JSON.stringify(value || null));
     }
 
     /**
