@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "2bfa1fa3-55a0-44ad-8fc5-e927b27a4660",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "bd0f3324-7e12-40e6-86ec-8b8e3d0e6dae",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/util/GameUtil.js",
+    "importerSettings": 7
+  }
 }

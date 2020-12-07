@@ -1,11 +1,11 @@
 {
     "name": "game-template",
-    "version": "1.0.0",
-    "description": " Cocos Creator 扩展组件 inspector、多语言预览等",
+    "type": "3d",
+    "uuid": "65f793ac-29ed-44ac-af15-ae68a4d6579d",
+    "version": "3.0.0-Preview.1",
     "dependencies": {
         "bluebird": "^3.7.2",
-        "lodash": "^4.17.20",
-        "whatwg-fetch": "^3.5.0"
+        "lodash": "^4.17.20"
     },
     "devDependencies": {
         "@types/bluebird": "^3.5.33",

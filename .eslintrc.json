@@ -39,7 +39,7 @@
         "guard-for-in": "error",
         "quotes": [
             "error",
-            "double"
+            "single"
         ],
         "no-trailing-spaces": "warn",
         "max-len": [

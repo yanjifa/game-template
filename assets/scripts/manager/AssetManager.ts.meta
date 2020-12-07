@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "8a56d273-0655-4ed5-bb71-9055e29c7ffa",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "6ae79cb0-72e3-4fa9-9b37-62caabb1e66f",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/manager/AssetManager.js",
+    "importerSettings": 7
+  }
 }

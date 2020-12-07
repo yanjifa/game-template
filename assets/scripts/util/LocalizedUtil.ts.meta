@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "4fbe7a2f-8056-4da1-ae87-9d0bdf61cca2",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "5130cdb8-2c4b-4ee4-b34f-24dabea1be04",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/util/LocalizedUtil.js",
+    "importerSettings": 7
+  }
 }

@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "031d3052-a8ef-4454-8a7b-d1ef24453e99",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "7a01fe76-5c3b-42bf-8154-b288afb18fbf",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/manager/SceneManager.js",
+    "importerSettings": 7
+  }
 }

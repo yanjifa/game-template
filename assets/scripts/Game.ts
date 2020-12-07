@@ -1,12 +1,12 @@
-import AssetManager from "./manager/AssetManager";
-import AudioManager from "./manager/AudioManager";
-import PopViewManager from "./manager/PopViewManager";
-import SceneManager from "./manager/SceneManager";
-import HttpClient from "./Net/HttpClient";
-import GameUtil from "./util/GameUtil";
-import LocalizedUtil from "./util/LocalizedUtil";
-import NotifyUtil from "./util/NotifyUtil";
-import StorageUtil from "./util/StorageUtil";
+import AssetManager from './manager/AssetManager';
+import AudioManager from './manager/AudioManager';
+import PopViewManager from './manager/PopViewManager';
+import SceneManager from './manager/SceneManager';
+import HttpClient from './net/HttpClient';
+import GameUtil from './util/GameUtil';
+import LocalizedUtil from './util/LocalizedUtil';
+import NotifyUtil from './util/NotifyUtil';
+import StorageUtil from './util/StorageUtil';
 
 export default class Game {
     /** 资源管理器 */

@@ -1,6 +1,7 @@
-import BaseSingleton from "../base/BaseSingeton";
-import { ELanguageType, ENotifyType, EStorageKey } from "../Enum";
-import Game from "../Game";
+import { JsonAsset, resources, sys } from 'cc';
+import BaseSingleton from '../base/BaseSingeton';
+import { ELanguageType, ENotifyType, EStorageKey } from '../Enum';
+import Game from '../Game';
 
 export default class LocalizedUtil extends BaseSingleton {
 
@@ -18,10 +19,10 @@ export default class LocalizedUtil extends BaseSingleton {
     private _language: ELanguageType = null;
 
     public async setup() {
-        const defaultLang = ELanguageType[cc.sys.language.toUpperCase()] || ELanguageType.EN;
+        const defaultLang = ELanguageType[sys.language.toUpperCase()] || ELanguageType.EN;
         this._language = Game.StorageUtil.read(EStorageKey.LANGUAGE, defaultLang) as ELanguageType;
         await this.loadLanguageDir(this._language);
-        console.log("LocalizedUtil setup");
+        console.log('LocalizedUtil setup');
     }
 
     /**
@@ -34,7 +35,7 @@ export default class LocalizedUtil extends BaseSingleton {
     private async loadLanguageDir(lang: string) {
         await Game.AssetManager.loadDir(`language/${lang}`);
         const cfgPath = `language/${lang}/StringConfig`;
-        this.localizeCfgs = cc.resources.get<cc.JsonAsset>(cfgPath, cc.JsonAsset).json;
+        this.localizeCfgs = resources.get<JsonAsset>(cfgPath, JsonAsset).json as Record<string, string>;
     }
 
     /**
@@ -60,12 +61,12 @@ export default class LocalizedUtil extends BaseSingleton {
         }
         const orginLang = this._language;
         this._language = lang;
-        Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_SHOW, "changeLanguage");
+        Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_SHOW, 'changeLanguage');
         Game.StorageUtil.write(EStorageKey.LANGUAGE, lang);
         await this.loadLanguageDir(lang);
         Game.NotifyUtil.emit(ENotifyType.LANGUAGE_CHANGED);
         this.releaseLanguageDir(orginLang);
-        Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_HIDE, "changeLanguage");
+        Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_HIDE, 'changeLanguage');
     }
 
     /**
@@ -76,10 +77,10 @@ export default class LocalizedUtil extends BaseSingleton {
      * @memberof LocalizedUtil
      */
     public getLangStr(tid: string): string {
-        const [id, ...args] = tid.split(",");
+        const [id, ...args] = tid.split(',');
         let str = this.localizeCfgs[id];
         args.forEach((arg, index) => {
-            str = str.replace("${p" + (index + 1) + "}", arg);
+            str = str.replace('${p' + (index + 1) + '}', arg);
         });
         return str;
     }

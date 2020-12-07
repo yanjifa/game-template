@@ -1,4 +1,4 @@
-import { ESceneName, EViewName } from "./Enum";
+import { ESceneName, EViewName } from './Enum';
 
 /**
  * 场景数据结构

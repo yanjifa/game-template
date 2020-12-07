@@ -1,16 +1,9 @@
-import { ESceneName } from "../Enum";
 
-const { ccclass } = cc._decorator;
+import { _decorator, Component } from 'cc';
+const { ccclass, property } = _decorator;
 
-/**
- * 场景基类
- *
- * @export
- * @class BaseScene
- */
-@ccclass
-export default class BaseScene extends cc.Component {
-
+@ccclass('BaseScene')
+export default class BaseScene extends Component {
     public async willEnter(userData?: Record<string, unknown>) {
         //
     }

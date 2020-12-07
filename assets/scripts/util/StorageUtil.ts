@@ -1,7 +1,8 @@
-import BaseSingleton from "../base/BaseSingeton";
-import { EStorageKey } from "../Enum";
+import { sys } from 'cc';
+import BaseSingleton from '../base/BaseSingeton';
+import { EStorageKey } from '../Enum';
 
-const STORAGE_PREFIX = "GAME";
+const STORAGE_PREFIX = 'GAME';
 
 /**
  * 客户端存档工具
@@ -14,7 +15,7 @@ export default class StorageUtil extends BaseSingleton {
     private storageMap: Map<string, unknown> = new Map();
 
     public async setup() {
-        console.log("StorageUtil setup");
+        console.log('StorageUtil setup');
     }
 
     /**
@@ -53,7 +54,7 @@ export default class StorageUtil extends BaseSingleton {
         if (this.storageMap.has(realKey)) {
             return this.storageMap.get(realKey) as T;
         }
-        const userData = JSON.parse(cc.sys.localStorage.getItem(realKey));
+        const userData = JSON.parse(sys.localStorage.getItem(realKey));
         if (userData !== null) {
             result = userData;
         }
@@ -71,7 +72,7 @@ export default class StorageUtil extends BaseSingleton {
     public write<T>(key: EStorageKey, value: T) {
         const realKey = this.getKey(key);
         this.storageMap.set(realKey, value);
-        cc.sys.localStorage.setItem(realKey, JSON.stringify(value || null));
+        sys.localStorage.setItem(realKey, JSON.stringify(value || null));
     }
 
     /**
@@ -83,7 +84,7 @@ export default class StorageUtil extends BaseSingleton {
     public remove(key: EStorageKey) {
         const realKey = this.getKey(key);
         this.storageMap.delete(realKey);
-        cc.sys.localStorage.removeItem(realKey);
+        sys.localStorage.removeItem(realKey);
     }
 
     /**
@@ -93,7 +94,7 @@ export default class StorageUtil extends BaseSingleton {
      */
     public clear() {
         this.storageMap.clear();
-        cc.sys.localStorage.clear();
+        sys.localStorage.clear();
     }
 
     /**

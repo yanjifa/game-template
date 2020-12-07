@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "4c507333-4aa6-4e5c-a1d8-e44c701eaba6",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "2c93e9c5-3f50-417e-8748-203e0943756a",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/base/BasePopView.js",
+    "importerSettings": 7
+  }
 }

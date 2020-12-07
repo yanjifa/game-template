@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "712432e0-72b6-4e45-90c5-42bf111e8964",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "41d46b46-abee-496a-95ec-5239f27172ad",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/component/LocalizedLabel.js",
+    "importerSettings": 7
+  }
 }

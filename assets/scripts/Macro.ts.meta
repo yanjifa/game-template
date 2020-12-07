@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "815608bc-f051-4bf7-a5d1-ce67e33a67ff",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "06977cc6-c788-46b7-ad43-f000b5a02783",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/Macro.js",
+    "importerSettings": 7
+  }
 }

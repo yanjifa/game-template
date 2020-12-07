@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "6d2405a1-2b0f-4698-918f-6be7b7b04f94",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "5baf80ec-e3f6-42e0-9419-97e0b521db5b",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/manager/AudioManager.js",
+    "importerSettings": 7
+  }
 }

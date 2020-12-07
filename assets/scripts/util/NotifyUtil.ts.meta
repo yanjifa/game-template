@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "7cb2d135-58ff-4957-a1ce-a3fda95796b2",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "c212d01a-c677-4251-8070-6d87c3339829",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/util/NotifyUtil.js",
+    "importerSettings": 7
+  }
 }

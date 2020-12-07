@@ -1,5 +1,5 @@
-import Bluebird = require("bluebird");
-import BaseSingleton from "../base/BaseSingeton";
+import { resources } from 'cc';
+import BaseSingleton from '../base/BaseSingeton';
 
 /**
  * 资源管理器, 加载目录支持引用计数, 注意不可父子目录混用
@@ -12,7 +12,7 @@ export default class AssetManager extends BaseSingleton {
     private loadedResDirMap: Map<string, number> = new Map();
 
     public async setup() {
-        console.log("AssetManager setup");
+        console.log('AssetManager setup');
     }
 
     /**
@@ -27,12 +27,15 @@ export default class AssetManager extends BaseSingleton {
         if (!paths || paths.length <= 0) {
             return;
         }
-        await Bluebird.each(paths, (path, index, pathLen) => {
-            return this.loadDir(path, (percent) => {
+        console.log('begin load:', paths);
+        const pathLen = paths.length;
+        for (let index = 0; index < pathLen; index++) {
+            const path = paths[index];
+            await this.loadDir(path, (percent) => {
                 percent = percent / pathLen + index / pathLen;
                 progressCallback && progressCallback(percent);
             });
-        });
+        }
     }
 
     /**
@@ -51,8 +54,8 @@ export default class AssetManager extends BaseSingleton {
             return;
         }
         this.loadedResDirMap.set(path, ++refNum);
-        await Bluebird.fromCallback((callback) => {
-            cc.resources.loadDir(path, (finish, total, item) => {
+        await new Promise((callback) => {
+            resources.loadDir(path, (finish, total, item) => {
                 progressCallback && progressCallback(finish / total);
             }, callback);
         });
@@ -85,7 +88,7 @@ export default class AssetManager extends BaseSingleton {
         if (refNum > 0) {
             return;
         }
-        cc.resources.release(path);
+        resources.release(path);
         console.log(`AssetManager releaseDir: ${path}`);
     }
 

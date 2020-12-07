@@ -1,33 +1,26 @@
-import Bluebird = require("bluebird");
-import { ENotifyType } from "../Enum";
-import Game from "../Game";
-import { IViewData } from "../Macro";
 
-const { ccclass, property } = cc._decorator;
+import { Color, Component, Node, SpriteComponent, tween, Vec3, _decorator } from 'cc';
+import { ENotifyType } from '../Enum';
+import Game from '../Game';
+import { IViewData } from '../Macro';
+const { ccclass, property } = _decorator;
 
-/**
- * popview 基类
- *
- * @export
- * @abstract
- * @class BasePopView
- */
-@ccclass
-export default abstract class BasePopView extends cc.Component {
+@ccclass('BasePopView')
+export default class BasePopView extends Component {
     @property({
-        type: cc.Node,
-        tooltip: "蒙黑节点",
+        type: Node,
+        tooltip: '蒙黑节点',
     })
-    protected maskNode: cc.Node = null;
+    protected maskNode: Node = null;
 
     @property({
-        type: cc.Node,
-        tooltip: "弹出框根节点",
+        type: Node,
+        tooltip: '弹出框根节点',
     })
-    protected rootNode: cc.Node = null;
+    protected rootNode: Node = null;
 
     protected getShowAudioUrl() {
-        return "common/audio/ui_panel_open";
+        return 'common/audio/ui_panel_open';
     }
 
     public static async prepareData(data: Record<string, string>) {
@@ -82,19 +75,20 @@ export default abstract class BasePopView extends cc.Component {
             return;
         }
         if (!this.rootNode || !this.maskNode) {
-            console.log("skip show anim");
+            console.log('skip show anim');
             return;
         }
-        await Bluebird.fromCallback((callback) => {
+        await new Promise((callback) => {
             const originScale = this.rootNode.scale;
-            this.rootNode.scale = 0;
-            this.maskNode.opacity = 0;
-            cc.tween(this.rootNode)
-                .to(0.25, { scale: originScale }, {easing: "backOut"})
-                .call(() => { callback(null) })
+            this.rootNode.scale = Vec3.ZERO;
+            const maskSprite = this.maskNode.getComponent(SpriteComponent);
+            maskSprite.color = new Color(255, 255, 255, 0);
+            tween(this.rootNode)
+                .to(0.25, { scale: originScale }, {easing: 'backOut'})
+                .call(callback)
                 .start();
-            cc.tween(this.maskNode)
-                .to(0.25, { opacity: 200 })
+            tween(maskSprite)
+                .to(0.25, { color: new Color(255, 255, 255, 200) })
                 .start();
         });
     }
@@ -131,16 +125,17 @@ export default abstract class BasePopView extends cc.Component {
             return;
         }
         if (!this.rootNode || !this.maskNode) {
-            console.log("skip hide anim");
+            console.log('skip hide anim');
             return;
         }
-        await Bluebird.fromCallback((callback) => {
-            cc.tween(this.rootNode)
-                .to(0.25, { scale: 0 }, {easing: "backIn"})
-                .call(() => { callback(null) })
+        const maskSprite = this.maskNode.getComponent(SpriteComponent);
+        await new Promise((callback) => {
+            tween(this.rootNode)
+                .to(0.25, { scale: Vec3.ZERO }, {easing: 'backIn'})
+                .call(callback)
                 .start();
-            cc.tween(this.maskNode)
-                .to(0.25, { opacity: 0 })
+            tween(maskSprite)
+                .to(0.25, { color:  new Color(255, 255, 255, 0)})
                 .start();
         });
     }
@@ -176,7 +171,9 @@ export default abstract class BasePopView extends cc.Component {
      * @returns {IViewData}
      * @memberof BasePopView
      */
-    public abstract getViewData(): IViewData;
+    public getViewData(): IViewData {
+        throw new Error('Method not implemented.');
+    }
 
     /**
      * 是否为全屏界面

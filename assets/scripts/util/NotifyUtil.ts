@@ -1,6 +1,5 @@
-import * as _ from "lodash";
-import BaseSingleton from "../base/BaseSingeton";
-import { ENotifyType } from "../Enum";
+import BaseSingleton from '../base/BaseSingeton';
+import { ENotifyType } from '../Enum';
 
 type NotifyFn = (userData: unknown, notifyType?: ENotifyType) => void;
 
@@ -34,7 +33,7 @@ export default class NotifyUtil extends BaseSingleton {
     }
 
     public async setup() {
-        console.log("NotifyUtil setup");
+        console.log('NotifyUtil setup');
     }
 
     /**
@@ -58,7 +57,9 @@ export default class NotifyUtil extends BaseSingleton {
      * @memberof NotifyUtil
      */
     public off(notifyType: ENotifyType, notifyFunc: NotifyFn, target: unknown) {
-        _.remove(this.observerMap.get(notifyType), (o) => o.func === notifyFunc && o.target === target);
+        const observers = this.observerMap.get(notifyType);
+        const index = observers.findIndex((o) => o.func === notifyFunc && o.target === target);
+        index >= 0 && observers.splice(index, 1);
     }
 
     /**
