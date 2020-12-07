@@ -7,7 +7,7 @@ import Game from '../Game';
 const { ccclass, property, executeInEditMode, menu } = _decorator;
 
 @ccclass('LocalizedLabel')
-// @executeInEditMode
+@executeInEditMode
 @menu('UI/Project/LocalizedLabel')
 export class LocalizedLabel extends Label {
     @property()
