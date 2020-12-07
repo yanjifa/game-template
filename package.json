@@ -4,7 +4,8 @@
     "description": " Cocos Creator 扩展组件 inspector、多语言预览等",
     "dependencies": {
         "bluebird": "^3.7.2",
-        "lodash": "^4.17.20"
+        "lodash": "^4.17.20",
+        "whatwg-fetch": "^3.5.0"
     },
     "devDependencies": {
         "@types/bluebird": "^3.5.33",

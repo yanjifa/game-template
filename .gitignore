@@ -9,6 +9,7 @@
 /local/local.json
 /local/node-tree-state.json
 /local/builder.json
+/local/settings.json
 
 #/////////////////////////////////////////////////////////////////////////////
 # npm files

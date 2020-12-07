@@ -2,6 +2,7 @@ import AssetManager from "./manager/AssetManager";
 import AudioManager from "./manager/AudioManager";
 import PopViewManager from "./manager/PopViewManager";
 import SceneManager from "./manager/SceneManager";
+import HttpClient from "./Net/HttpClient";
 import GameUtil from "./util/GameUtil";
 import LocalizedUtil from "./util/LocalizedUtil";
 import NotifyUtil from "./util/NotifyUtil";
@@ -39,5 +40,9 @@ export default class Game {
     /** 客户端存档工具 */
     public static get StorageUtil(): StorageUtil {
         return StorageUtil.getInstance();
+    }
+    /** http 客户端 */
+    public static get HttpClient(): HttpClient {
+        return HttpClient.getInstance();
     }
 }

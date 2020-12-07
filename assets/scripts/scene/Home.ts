@@ -25,7 +25,11 @@ export default class Home extends BaseScene {
         this.timeLabel.tid = `TID_LABEL_TIME,${hour}:${minutes}:${sec}`;
     }
 
-    private onSettingBtnClicked() {
+    private async onSettingBtnClicked() {
+        // const result = await Game.HttpClient.get("https://www.baidu.com/s", {
+        //     word: "聊天机器人",
+        // });
+        // console.log(result);
         Game.PopViewManager.showPopView(EViewName.SETTING);
     }
 
