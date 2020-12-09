@@ -113,6 +113,7 @@
                 "plugin:@typescript-eslint/recommended"
             ],
             "rules": {
+                "@typescript-eslint/no-inferrable-types": "off",
                 "@typescript-eslint/no-duplicate-imports": "error",
                 "@typescript-eslint/ban-ts-comment": "off",
                 "@typescript-eslint/indent": [

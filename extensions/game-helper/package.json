@@ -1,6 +1,5 @@
 {
     "name": "game-helper",
-    "package_version": 2,
     "version": "1.0.0",
     "description": "项目扩展, 实现多语言预览",
     "author": "yanjifa",

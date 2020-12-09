@@ -1,5 +1,5 @@
 
-import { BitmapFont, Editor, Label, resources, _decorator } from 'cc';
+import { BitmapFont, Label, resources, _decorator } from 'cc';
 import { EDITOR } from 'cce.env';
 import { ENotifyType } from '../Enum';
 import Game from '../Game';

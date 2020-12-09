@@ -1,4 +1,5 @@
 'use strict';
+
 exports.methods = {
     getLangStr(tid) {
         return tid;

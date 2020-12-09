@@ -81,7 +81,7 @@ export default class AssetManager extends BaseSingleton {
      */
     public releaseDir(path: string): void {
         let refNum = this.loadedResDirMap.get(path);
-        if (refNum === null && refNum === undefined) {
+        if (refNum === null || refNum === undefined) {
             return;
         }
         this.loadedResDirMap.set(path, --refNum);
@@ -100,11 +100,11 @@ export default class AssetManager extends BaseSingleton {
      * @memberof AssetManager
      */
     public isDirLoaded(path: string): boolean {
-        return this.loadedResDirMap.get(path) > 0;
+        return this.loadedResDirMap.get(path) as number > 0;
     }
 
     public dumpDirMap() {
-        const data = [];
+        const data: Array<{dir: string, refNum: number}> = [];
         this.loadedResDirMap.forEach((v, k) => {
             v !== 0 && data.push({ dir: k, refNum: v });
         });
