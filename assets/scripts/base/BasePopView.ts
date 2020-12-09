@@ -6,7 +6,7 @@ import { IViewData } from '../Macro';
 const { ccclass, property } = _decorator;
 
 @ccclass('BasePopView')
-export default class BasePopView extends Component {
+export default abstract class BasePopView extends Component {
     @property({
         type: Node,
         tooltip: '蒙黑节点',
@@ -171,9 +171,7 @@ export default class BasePopView extends Component {
      * @returns {IViewData}
      * @memberof BasePopView
      */
-    public getViewData(): IViewData {
-        throw new Error('Method not implemented.');
-    }
+    public abstract getViewData(): IViewData;
 
     /**
      * 是否为全屏界面

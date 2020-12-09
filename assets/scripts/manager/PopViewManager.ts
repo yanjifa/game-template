@@ -88,7 +88,7 @@ export default class PopViewManager extends BaseSingleton {
         this.isCreatingPopView = false;
 
         Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_HIDE, `createPopView: ${viewData.viewName}`);
-
+        // @ts-expect-error
         const popView = node.getComponent(BasePopView);
         const curTopView = this.createdPopViews[this.createdPopViews.length - 1];
         if (curTopView) {
