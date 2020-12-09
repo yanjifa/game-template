@@ -24,7 +24,7 @@ export default class StorageUtil extends BaseSingleton {
      * @memberof StorageUtil
      */
     public dumpStorageMap() {
-        const data = [];
+        const data: Array<{key: string, value: unknown}> = [];
         this.storageMap.forEach((v, k) => {
             data.push({ key: k, value: v });
         });

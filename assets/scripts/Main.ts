@@ -34,7 +34,8 @@ export class Main extends Component {
     private blockReasons: string[] = [];
 
     protected onLoad() {
-        globalThis['Game'] = Game;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (globalThis as any).Game = Game;
         // 加载动画顶层遮罩
         this.LoadingNode.active = true;
         tween(this.loadAnimNode).by(0.1, { angle: -40 }).repeatForever().start();

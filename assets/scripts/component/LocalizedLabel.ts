@@ -10,8 +10,9 @@ const { ccclass, property, executeInEditMode, menu } = _decorator;
 @executeInEditMode
 @menu('UI/Project/LocalizedLabel')
 export class LocalizedLabel extends Label {
-    @property()
+    @property
     private _tid = 'tid';
+
     @property({
         multiline: true,
         displayOrder: 3,
@@ -24,7 +25,8 @@ export class LocalizedLabel extends Label {
     get tid() {
         return this._tid;
     }
-    @property()
+
+    @property
     private _bmfontUrl = 'null';
     @property({
         displayOrder: 2,
