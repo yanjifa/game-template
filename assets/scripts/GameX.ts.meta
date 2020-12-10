@@ -2,7 +2,7 @@
   "ver": "4.0.9",
   "importer": "typescript",
   "imported": true,
-  "uuid": "01057d8e-1255-4dde-b72e-485dc0c34e0d",
+  "uuid": "44ec7d3d-99e3-4375-81dd-cea5513cb50e",
   "files": [
     ".js",
     "editor.js",
@@ -11,7 +11,7 @@
   "subMetas": {},
   "userData": {
     "importAsPlugin": false,
-    "moduleId": "project:///assets/scripts/Game.js",
+    "moduleId": "project:///assets/scripts/GameX.js",
     "importerSettings": 7
   }
 }

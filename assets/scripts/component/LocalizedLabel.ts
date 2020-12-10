@@ -1,17 +1,17 @@
 
 import { BitmapFont, Label, resources, _decorator } from 'cc';
 import { EDITOR } from 'cce.env';
-import { ENotifyType } from '../Enum';
-import Game from '../Game';
+import AppGame from '../AppGame';
+import { ENotifyType, HELPER_PK_NAME } from '../Enum';
 
 const { ccclass, property, executeInEditMode, menu } = _decorator;
 
 @ccclass('LocalizedLabel')
 @executeInEditMode
-@menu('UI/Project/LocalizedLabel')
+@menu('Localized/LocalizedLabel')
 export class LocalizedLabel extends Label {
     @property
-    private _tid = 'tid';
+    private _tid = '';
 
     @property({
         multiline: true,
@@ -27,7 +27,7 @@ export class LocalizedLabel extends Label {
     }
 
     @property
-    private _bmfontUrl = 'null';
+    private _bmfontUrl = '';
     @property({
         displayOrder: 2,
         visible: function(this: LocalizedLabel) { return this.font instanceof BitmapFont },
@@ -42,11 +42,11 @@ export class LocalizedLabel extends Label {
 
     protected onLoad() {
         this.updateString();
-        Game.NotifyUtil.on(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
+        AppGame.NotifyUtil.on(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
     }
 
     public onDestroy() {
-        Game.NotifyUtil.off(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
+        AppGame.NotifyUtil.off(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
         super.onDestroy();
     }
 
@@ -78,16 +78,19 @@ export class LocalizedLabel extends Label {
             return;
         }
         // 获取多语言文本
-        this.string = '' + Game.LocalizeUtil.getLangStr(this._tid);
+        this.string = '' + AppGame.LocalizeUtil.getLangStr(this._tid);
         // 如果使用了 bmfont, 切换对应语言的 bmfont
         if (!this.useSystemFont && this._bmfontUrl) {
-            const lang = Game.LocalizeUtil.language;
-            this.font = resources.get<BitmapFont>(this._bmfontUrl.replace('${lang}', lang), BitmapFont);
+            this.font.decRef();
+            const lang = AppGame.LocalizeUtil.language;
+            const font = resources.get<BitmapFont>(this._bmfontUrl.replace('${lang}', lang), BitmapFont);
+            this.font = font;
+            font.addRef();
         }
     }
 
     private async editorUpdateString() {
-        const str = await Editor.Message.request('game-helper', 'getLangStr', this._tid);
+        const str = await Editor.Message.request(HELPER_PK_NAME, 'getLangStr', this._tid);
         this.string = '' + str;
     }
 }

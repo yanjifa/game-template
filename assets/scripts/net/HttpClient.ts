@@ -8,7 +8,7 @@ export default class HttpClient extends BaseSingleton {
     public async get(url: string, params?: Record<string, unknown>) {
         try {
             if (params) {
-                const paramsArr = [];
+                const paramsArr: string[] = [];
                 Object.keys(params).map((key) => paramsArr.push(`${key}=${params[key]}`));
                 (url.search(/\?/) === -1) ? url += '?' : url += '&';
                 url += paramsArr.join('&');

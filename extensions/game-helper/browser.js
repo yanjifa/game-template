@@ -15,15 +15,10 @@ async function loadLangConfig() {
     }
 }
 
-exports.load = function () {
-    loadLangConfig();
-};
-
-exports.unload = function() {
-
-};
-
 exports.methods = {
+    onDBaReady() {
+        loadLangConfig();
+    },
     getLangStr(param) {
         if (localizeCfgs === null) {
             return 'config error';
@@ -34,7 +29,17 @@ exports.methods = {
             args.forEach((arg, index) => {
                 str = str.replace('${p' + (index + 1) + '}', arg);
             });
+        } else {
+            str = param;
         }
         return str;
     },
+};
+
+exports.load = function () {
+
+};
+
+exports.unload = function() {
+
 };

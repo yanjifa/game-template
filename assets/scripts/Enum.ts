@@ -1,6 +1,11 @@
 /* eslint-disable no-multi-spaces */
 
 /**
+ * 插件 packge Name
+ */
+export const HELPER_PK_NAME = 'game-helper';
+
+/**
  * 支持的语言类型
  *
  * @export

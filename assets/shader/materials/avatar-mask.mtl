@@ -12,8 +12,20 @@
       "USE_TEXTURE": true
     }
   ],
-  "_states": [],
+  "_states": [
+    {
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      },
+      "depthStencilState": {},
+      "rasterizerState": {}
+    }
+  ],
   "_props": [
-    {}
+    {
+      "edge": 0.3
+    }
   ]
 }

@@ -23,6 +23,9 @@
             }
         },
         "messages": {
+            "asset-db:ready": {
+                "methods": ["onDBaReady"]
+            },
             "getLangStr": {
                 "methods": ["getLangStr"]
             }

@@ -1,7 +1,7 @@
 
 import { Color, Component, Label, Node, SpriteComponent, tween, _decorator } from 'cc';
 import { ENotifyType, ESceneName } from './Enum';
-import Game from './Game';
+import AppGame from './AppGame';
 const { ccclass, property } = _decorator;
 
 const TEST = true;
@@ -35,7 +35,7 @@ export class Main extends Component {
 
     protected onLoad() {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (globalThis as any).Game = Game;
+        (globalThis as any).Game = AppGame;
         // 加载动画顶层遮罩
         this.LoadingNode.active = true;
         tween(this.loadAnimNode).by(0.1, { angle: -40 }).repeatForever().start();
@@ -46,19 +46,19 @@ export class Main extends Component {
     }
 
     protected onDestroy() {
-        Game.NotifyUtil.off(ENotifyType.BLOCK_INPUT_SHOW, this.showBlockInput, this);
-        Game.NotifyUtil.off(ENotifyType.BLOCK_INPUT_HIDE, this.hideBlockInput, this);
+        AppGame.NotifyUtil.off(ENotifyType.BLOCK_INPUT_SHOW, this.showBlockInput, this);
+        AppGame.NotifyUtil.off(ENotifyType.BLOCK_INPUT_HIDE, this.hideBlockInput, this);
     }
 
     protected async start() {
         await this.gameSetup();
-        Game.NotifyUtil.on(ENotifyType.BLOCK_INPUT_SHOW, this.showBlockInput, this);
-        Game.NotifyUtil.on(ENotifyType.BLOCK_INPUT_HIDE, this.hideBlockInput, this);
+        AppGame.NotifyUtil.on(ENotifyType.BLOCK_INPUT_SHOW, this.showBlockInput, this);
+        AppGame.NotifyUtil.on(ENotifyType.BLOCK_INPUT_HIDE, this.hideBlockInput, this);
         //
-        Game.SceneManager.setSceneRootNode(this.sceneRootNode);
-        Game.PopViewManager.setPopViewRootNode(this.popViewRootNode);
+        AppGame.SceneManager.setSceneRootNode(this.sceneRootNode);
+        AppGame.PopViewManager.setPopViewRootNode(this.popViewRootNode);
         // 载入 Home 场景
-        await Game.SceneManager.gotoScene({
+        await AppGame.SceneManager.gotoScene({
             sceneName: ESceneName.HOME,
             resDirs: ['home'],
             prefabUrl: 'home/prefab/Home',
@@ -70,12 +70,12 @@ export class Main extends Component {
     }
 
     private async gameSetup() {
-        await Game.StorageUtil.setup();
-        await Game.GameUtil.setup();
-        await Game.LocalizeUtil.setup();
-        await Game.NotifyUtil.setup();
-        await Game.AudioManager.setup();
-        await Game.PopViewManager.setup();
+        await AppGame.StorageUtil.setup();
+        await AppGame.GameUtil.setup();
+        await AppGame.LocalizeUtil.setup();
+        await AppGame.NotifyUtil.setup();
+        await AppGame.AudioManager.setup();
+        await AppGame.PopViewManager.setup();
     }
 
     private showBlockInput(reason: string) {

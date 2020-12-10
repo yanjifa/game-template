@@ -1,7 +1,7 @@
 
 import { Color, Component, Node, SpriteComponent, tween, Vec3, _decorator } from 'cc';
 import { ENotifyType } from '../Enum';
-import Game from '../Game';
+import AppGame from '../AppGame';
 import { IViewData } from '../Macro';
 const { ccclass, property } = _decorator;
 
@@ -40,17 +40,17 @@ export default abstract class BasePopView extends Component {
     public async showPopView(skipAnim?: boolean) {
         this.onShowBegin();
         try {
-            Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_SHOW, `show:${this.getViewData().viewName}`);
+            AppGame.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_SHOW, `show:${this.getViewData().viewName}`);
             this.playShowAudio(skipAnim);
             await this.runShowAnim(skipAnim);
             if (this.isFullScreen()) {
-                Game.PopViewManager.fullScreenViewRefNum += 1;
+                AppGame.PopViewManager.fullScreenViewRefNum += 1;
             }
         } catch (error) {
             console.error(error);
             throw error;
         } finally {
-            Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_HIDE, `show:${this.getViewData().viewName}`);
+            AppGame.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_HIDE, `show:${this.getViewData().viewName}`);
         }
         this.onShowDone();
     }
@@ -67,7 +67,7 @@ export default abstract class BasePopView extends Component {
         if (!audioUrl) {
             return;
         }
-        Game.AudioManager.playEffect(audioUrl);
+        AppGame.AudioManager.playEffect(audioUrl);
     }
 
     protected async runShowAnim(skipAnim?: boolean): Promise<void> {
@@ -105,15 +105,15 @@ export default abstract class BasePopView extends Component {
      * @memberof BasePopView
      */
     protected async hidePopView(skipAnim = false) {
-        Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_SHOW, `hide:${this.getViewData().viewName}`);
+        AppGame.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_SHOW, `hide:${this.getViewData().viewName}`);
         this.onHideBegin();
         if (this.isFullScreen()) {
-            Game.PopViewManager.fullScreenViewRefNum -= 1;
+            AppGame.PopViewManager.fullScreenViewRefNum -= 1;
         }
         await this.runHideAnim(skipAnim);
         this.onHideDone();
-        Game.PopViewManager.destroyPopView(this);
-        Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_HIDE, `hide:${this.getViewData().viewName}`);
+        AppGame.PopViewManager.destroyPopView(this);
+        AppGame.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_HIDE, `hide:${this.getViewData().viewName}`);
     }
 
     protected onHideBegin() {

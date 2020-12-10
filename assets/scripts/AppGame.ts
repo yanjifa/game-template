@@ -7,8 +7,11 @@ import GameUtil from './util/GameUtil';
 import LocalizedUtil from './util/LocalizedUtil';
 import NotifyUtil from './util/NotifyUtil';
 import StorageUtil from './util/StorageUtil';
-
-export default class Game {
+/**
+ * 导出各种 Manager
+ * 避免直接叫 Game, 和 creator 内部 cc.Game 一样自动导入容易导错包
+ */
+export default class AppGame {
     /** 资源管理器 */
     public static get AssetManager(): AssetManager {
         return AssetManager.getInstance();

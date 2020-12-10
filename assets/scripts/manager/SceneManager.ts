@@ -2,7 +2,7 @@ import { instantiate, Node, path, Prefab, resources, Vec3 } from 'cc';
 import BaseScene from '../base/BaseScene';
 import BaseSingleton from '../base/BaseSingeton';
 import { ENotifyType } from '../Enum';
-import Game from '../Game';
+import AppGame from '../AppGame';
 import { ISceneData } from '../Macro';
 
 /**
@@ -51,9 +51,9 @@ export default class SceneManager extends BaseSingleton {
         const needLoadResDirs = this.difference(sceneData.resDirs, currentSceneResDirs);
         console.log('gotoScene', needLoadResDirs);
         try {
-            Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_SHOW, `gotoScene: ${sceneData.sceneName}`);
+            AppGame.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_SHOW, `gotoScene: ${sceneData.sceneName}`);
             // 加载资源
-            await Game.AssetManager.loadDirs(needLoadResDirs);
+            await AppGame.AssetManager.loadDirs(needLoadResDirs);
             // 创建场景
             const prefab = resources.get<Prefab>(sceneData.prefabUrl, Prefab);
             const node = instantiate(prefab);
@@ -64,7 +64,7 @@ export default class SceneManager extends BaseSingleton {
             await newScene.willEnter(userData);
             newScene.didEnter();
             // 切换场景通知
-            Game.NotifyUtil.emit(ENotifyType.SWITCH_SCENE, {
+            AppGame.NotifyUtil.emit(ENotifyType.SWITCH_SCENE, {
                 from: this.currentSceneData ? this.currentSceneData.sceneName : null,
                 to: sceneData.sceneName,
             });
@@ -74,13 +74,13 @@ export default class SceneManager extends BaseSingleton {
                 this.currentScene.didLeave();
                 this.currentScene.node.destroy();
             }
-            Game.AssetManager.releaseDirs(needReleaseResDirs);
+            AppGame.AssetManager.releaseDirs(needReleaseResDirs);
             this.currentSceneData = sceneData;
             this.currentScene = newScene;
         } catch (e) {
             console.error(e);
         } finally {
-            Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_HIDE, `gotoScene: ${sceneData.sceneName}`);
+            AppGame.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_HIDE, `gotoScene: ${sceneData.sceneName}`);
         }
     }
 

@@ -1,5 +1,7 @@
-import { _decorator, Component, Node, Label, macro } from 'cc';
+import { _decorator, Label, macro, EventTouch } from 'cc';
+import AppGame from '../AppGame';
 import BaseScene from '../base/BaseScene';
+import { ELanguageType } from '../Enum';
 const { ccclass, property } = _decorator;
 
 @ccclass('Home')
@@ -25,4 +27,7 @@ export class Home extends BaseScene {
         this.timeLabel.tid = `TID_LABEL_TIME,${hour}:${minutes}:${sec}`;
     }
 
+    private onLangBtnClicked(event: EventTouch, lang: string) {
+        AppGame.LocalizeUtil.changeLanguage(lang as ELanguageType);
+    }
 }

@@ -2,7 +2,7 @@ import { instantiate, path, Prefab, resources, Vec3, Node } from 'cc';
 import BasePopView from '../base/BasePopView';
 import BaseSingleton from '../base/BaseSingeton';
 import { ENotifyType, EViewName } from '../Enum';
-import Game from '../Game';
+import AppGame from '../AppGame';
 import { IViewData } from '../Macro';
 
 interface IGameViewCfg {
@@ -77,9 +77,9 @@ export default class PopViewManager extends BaseSingleton {
         this.isCreatingPopView = true;
         const viewData = createData.viewCfg.viewData;
 
-        Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_SHOW, `createPopView: ${viewData.viewName}`);
+        AppGame.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_SHOW, `createPopView: ${viewData.viewName}`);
 
-        await Game.AssetManager.loadDirs(viewData.resDirs);
+        await AppGame.AssetManager.loadDirs(viewData.resDirs);
         const prefab = resources.get<Prefab>(viewData.prefabUrl, Prefab);
         const node = instantiate(prefab);
         node.name = path.basename(viewData.prefabUrl);
@@ -87,7 +87,7 @@ export default class PopViewManager extends BaseSingleton {
         node.parent = this.popViewRootNode;
         this.isCreatingPopView = false;
 
-        Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_HIDE, `createPopView: ${viewData.viewName}`);
+        AppGame.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_HIDE, `createPopView: ${viewData.viewName}`);
         // @ts-expect-error
         const popView = node.getComponent(BasePopView);
         const curTopView = this.createdPopViews[this.createdPopViews.length - 1];
@@ -117,6 +117,6 @@ export default class PopViewManager extends BaseSingleton {
             curTopView.onFocus();
             console.log(`view: ${viewData.viewName} onFocus`);
         }
-        Game.AssetManager.releaseDirs(viewData.resDirs);
+        AppGame.AssetManager.releaseDirs(viewData.resDirs);
     }
 }

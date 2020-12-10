@@ -17,6 +17,7 @@ CCEffect %{
         cullMode: none
       properties:
         alphaThreshold: { value: 0.5 }
+        edge: { value: 0.15 }
 }%
 
 CCProgram avatar-vs %{
@@ -69,6 +70,10 @@ CCProgram avatar-fs %{
     layout(set = 2, binding = 10) uniform sampler2D cc_spriteTexture;
   #endif
 
+  uniform args {
+    float edge;
+  };
+
   vec4 frag () {
     vec4 o = vec4(1, 1, 1, 1);
 
@@ -81,6 +86,16 @@ CCProgram avatar-fs %{
     #endif
 
     o *= color;
+
+    vec2 uv = uv0.xy - vec2(0.5, 0.5);
+    float rx = abs(uv.x) - (0.5 - edge);
+    float ry = abs(uv.y) - (0.5 - edge);
+    float mx = step(0.5 - edge, abs(uv.x));
+    float my = step(0.5 - edge, abs(uv.y));
+    float radius = length(vec2(rx, ry));
+    float a = 1.0 - mx * my * step(edge, radius) * smoothstep(0., edge * 0.01, radius - edge);
+    o.a *= a;
+
     ALPHA_TEST(o);
     return o;
   }

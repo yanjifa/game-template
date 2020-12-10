@@ -80,6 +80,7 @@ export default class AssetManager extends BaseSingleton {
      * @memberof AssetManager
      */
     public releaseDir(path: string): void {
+        // TODO 此方法无效
         let refNum = this.loadedResDirMap.get(path);
         if (refNum === null || refNum === undefined) {
             return;
