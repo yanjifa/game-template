@@ -60,10 +60,10 @@ export class LocalizedSprite extends SpriteComponent {
         }
         if (this._spriteUrl) {
             const lang = AppGame.LocalizeUtil.language;
-            // this.spriteFrame.decRef();
-            const sf = resources.get<SpriteFrame>(this._spriteUrl.replace('${lang}', lang), SpriteFrame);
+            this.spriteFrame.decRef();
+            const sf = resources.get<SpriteFrame>(this._spriteUrl.replace('${lang}', lang) + '/spriteFrame', SpriteFrame);
             this.spriteFrame = sf;
-            // sf.addRef();
+            sf.addRef();
         }
     }
 }
