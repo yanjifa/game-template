@@ -1300,7 +1300,7 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 131.19,
+      "width": 80,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1336,7 +1336,7 @@
       "b": 0,
       "a": 255
     },
-    "_string": "English",
+    "_string": "英文",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 40,

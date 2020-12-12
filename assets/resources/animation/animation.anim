@@ -34,13 +34,13 @@
             0.5
           ],
           "easingMethods": {
-            "0": "expoInOut"
+            "0": "linear"
           }
         }
       }
     ],
     "_commonTargets": [],
-    "_hash": 1792593774
+    "_hash": 4138460082
   },
   {
     "__type__": "cc.animation.ComponentPath",
