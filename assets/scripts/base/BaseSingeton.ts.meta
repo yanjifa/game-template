@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "27571de8-3c52-4892-a2a4-fd672edf95ab",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "ea5caa74-befd-4bbc-976e-ee7f011f881b",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/base/BaseSingeton.js",
+    "importerSettings": 7
+  }
 }

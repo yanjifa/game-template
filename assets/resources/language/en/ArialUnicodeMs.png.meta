@@ -1,15 +1,12 @@
 {
-  "ver": "2.3.5",
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
   "uuid": "18d52416-e8a8-4c04-99d6-86ab3d06214d",
-  "type": "sprite",
-  "wrapMode": "clamp",
-  "filterMode": "bilinear",
-  "premultiplyAlpha": false,
-  "genMipmaps": false,
-  "packable": true,
-  "width": 441,
-  "height": 529,
-  "platformSettings": {},
+  "files": [
+    ".png",
+    ".json"
+  ],
   "subMetas": {
     "ArialUnicodeMs": {
       "ver": "1.0.4",
@@ -30,7 +27,75 @@
       "borderBottom": 0,
       "borderLeft": 0,
       "borderRight": 0,
+      "subMetas": {},
+      "importer": "*",
+      "imported": false,
+      "files": [],
+      "userData": {},
+      "displayName": "",
+      "id": "",
+      "name": ""
+    },
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "18d52416-e8a8-4c04-99d6-86ab3d06214d@6c48a",
+      "displayName": "ArialUnicodeMs",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "imageUuidOrDatabaseUri": "18d52416-e8a8-4c04-99d6-86ab3d06214d",
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "18d52416-e8a8-4c04-99d6-86ab3d06214d@f9941",
+      "displayName": "ArialUnicodeMs",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0.5,
+        "offsetY": 21.5,
+        "trimX": 3,
+        "trimY": 2,
+        "width": 436,
+        "height": 482,
+        "rawWidth": 441,
+        "rawHeight": 529,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "18d52416-e8a8-4c04-99d6-86ab3d06214d@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.8",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
       "subMetas": {}
     }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "18d52416-e8a8-4c04-99d6-86ab3d06214d@f9941"
   }
 }

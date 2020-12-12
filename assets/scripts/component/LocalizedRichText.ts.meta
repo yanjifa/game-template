@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "7c2f9fb8-936a-41ae-b3de-69cc9e84de23",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "75b9b024-601d-4e13-87d0-856bbd90843c",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/component/LocalizedRichText.js",
+    "importerSettings": 7
+  }
 }

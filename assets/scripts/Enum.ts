@@ -1,14 +1,19 @@
 /* eslint-disable no-multi-spaces */
 
 /**
+ * 插件 packge Name
+ */
+export const HELPER_PK_NAME = 'game-helper';
+
+/**
  * 支持的语言类型
  *
  * @export
  * @enum {number}
  */
 export enum ELanguageType {
-    EN = "en",   // 英文
-    ZH = "zh"    // 中文
+    EN = 'en',   // 英文
+    ZH = 'zh'    // 中文
 }
 
 /**
@@ -18,7 +23,7 @@ export enum ELanguageType {
  * @enum {number}
  */
 export enum EStorageKey {
-    LANGUAGE = "LANGUAGE",   // 语言存档
+    LANGUAGE = 'LANGUAGE',   // 语言存档
 }
 
 /**
@@ -28,10 +33,10 @@ export enum EStorageKey {
  * @enum {number}
  */
 export enum ENotifyType {
-    LANGUAGE_CHANGED = "LANGUAGE_CHANGED",   // 语言变更
-    BLOCK_INPUT_SHOW = "BLOCK_INPUT_SHOW",   // active block input
-    BLOCK_INPUT_HIDE = "BLOCK_INPUT_HIDE",   // disable block input
-    SWITCH_SCENE     = "SWITCH_SCENE",       // 切换场景
+    LANGUAGE_CHANGED = 'LANGUAGE_CHANGED',   // 语言变更
+    BLOCK_INPUT_SHOW = 'BLOCK_INPUT_SHOW',   // active block input
+    BLOCK_INPUT_HIDE = 'BLOCK_INPUT_HIDE',   // disable block input
+    SWITCH_SCENE     = 'SWITCH_SCENE',       // 切换场景
 }
 
 /**
@@ -41,7 +46,7 @@ export enum ENotifyType {
  * @enum {number}
  */
 export enum ESceneName {
-    HOME = "HOME", // 主场景
+    HOME = 'HOME', // 主场景
 }
 
 /**
@@ -51,6 +56,6 @@ export enum ESceneName {
  * @enum {number}
  */
 export enum EViewName {
-    SETTING        = "SETTING",          // 设置界面
-    LIST_VIEW_DEMO = "LIST_VIEW_DEMO",   // listview 示范
+    SETTING        = 'SETTING',          // 设置界面
+    LIST_VIEW_DEMO = 'LIST_VIEW_DEMO',   // listview 示范
 }

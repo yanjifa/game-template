@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "6f2f4591-dc7b-4c6c-b849-bef3096042f9",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "dfd19689-752f-4536-b931-abe9517f4b5e",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/component/ListView.js",
+    "importerSettings": 7
+  }
 }

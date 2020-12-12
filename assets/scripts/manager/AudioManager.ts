@@ -1,4 +1,4 @@
-import BaseSingleton from "../base/BaseSingeton";
+import BaseSingleton from '../base/BaseSingeton';
 
 /**
  * 音频管理器
@@ -8,7 +8,7 @@ import BaseSingleton from "../base/BaseSingeton";
  */
 export default class AudioManager extends BaseSingleton {
     public async setup() {
-        console.log("AudioManager setup");
+        console.log('AudioManager setup');
     }
 
     public playMusic(url: string) {

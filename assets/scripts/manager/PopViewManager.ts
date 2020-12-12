@@ -1,8 +1,9 @@
-import BasePopView from "../base/BasePopView";
-import BaseSingleton from "../base/BaseSingeton";
-import { ENotifyType, EViewName } from "../Enum";
-import Game from "../Game";
-import { IViewData } from "../Macro";
+import { instantiate, path, Prefab, resources, Vec3, Node } from 'cc';
+import BasePopView from '../base/BasePopView';
+import BaseSingleton from '../base/BaseSingeton';
+import { ENotifyType, EViewName } from '../Enum';
+import AppGame from '../AppGame';
+import { IViewData } from '../Macro';
 
 interface IGameViewCfg {
     viewData: IViewData;
@@ -30,7 +31,7 @@ export default class PopViewManager extends BaseSingleton {
     }
     private _fullScreenViewRefNum = 0;
 
-    private popViewRootNode: cc.Node = null;
+    private popViewRootNode: Node = null;
 
     private viewDataMap: Map<EViewName, IGameViewCfg> = new Map();
 
@@ -41,10 +42,10 @@ export default class PopViewManager extends BaseSingleton {
     private isCreatingPopView = false;
 
     public async setup() {
-        console.log("PopViewManager setup");
+        console.log('PopViewManager setup');
     }
 
-    public setPopViewRootNode(node: cc.Node) {
+    public setPopViewRootNode(node: Node) {
         this.popViewRootNode = node;
     }
 
@@ -60,7 +61,7 @@ export default class PopViewManager extends BaseSingleton {
             return;
         }
         if (!this.popViewRootNode) {
-            console.error("popViewRootNode is null");
+            console.error('popViewRootNode is null');
         }
         this.createQueue.push({ viewCfg, userData });
         if (!this.isCreatingPopView) {
@@ -76,18 +77,18 @@ export default class PopViewManager extends BaseSingleton {
         this.isCreatingPopView = true;
         const viewData = createData.viewCfg.viewData;
 
-        Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_SHOW, `createPopView: ${viewData.viewName}`);
+        AppGame.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_SHOW, `createPopView: ${viewData.viewName}`);
 
-        await Game.AssetManager.loadDirs(viewData.resDirs);
-        const prefab = cc.resources.get<cc.Prefab>(viewData.prefabUrl, cc.Prefab);
-        const node = cc.instantiate(prefab);
-        node.name = cc.path.basename(viewData.prefabUrl);
-        node.position = cc.Vec3.ZERO;
+        await AppGame.AssetManager.loadDirs(viewData.resDirs);
+        const prefab = resources.get<Prefab>(viewData.prefabUrl, Prefab);
+        const node = instantiate(prefab);
+        node.name = path.basename(viewData.prefabUrl);
+        node.position = Vec3.ZERO;
         node.parent = this.popViewRootNode;
         this.isCreatingPopView = false;
 
-        Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_HIDE, `createPopView: ${viewData.viewName}`);
-
+        AppGame.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_HIDE, `createPopView: ${viewData.viewName}`);
+        // @ts-expect-error
         const popView = node.getComponent(BasePopView);
         const curTopView = this.createdPopViews[this.createdPopViews.length - 1];
         if (curTopView) {
@@ -116,6 +117,6 @@ export default class PopViewManager extends BaseSingleton {
             curTopView.onFocus();
             console.log(`view: ${viewData.viewName} onFocus`);
         }
-        Game.AssetManager.releaseDirs(viewData.resDirs);
+        AppGame.AssetManager.releaseDirs(viewData.resDirs);
     }
 }

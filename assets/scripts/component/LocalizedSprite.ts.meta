@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "649502d8-1de2-49a2-9904-c9c0741ed714",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "48522012-a5a7-4edc-8fe1-0030971d379a",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/component/LocalizedSprite.js",
+    "importerSettings": 7
+  }
 }

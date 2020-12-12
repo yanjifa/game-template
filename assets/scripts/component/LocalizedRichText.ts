@@ -1,18 +1,22 @@
-import { ENotifyType } from "../Enum";
-import Game from "../Game";
 
-const {ccclass, property, executeInEditMode, menu, inspector} = cc._decorator;
+import { RichText, _decorator } from 'cc';
+import { EDITOR } from 'cce.env';
+import AppGame from '../AppGame';
+import { ENotifyType, HELPER_PK_NAME } from '../Enum';
 
-@ccclass
-@executeInEditMode()
-@menu(`${CC_EDITOR && Editor.T("game-helper.projectcomponent")}/LocalizedRichText`)
-@inspector("packages://game-helper/inspectors/localizedrichtext.js")
-export default class LocalizedRichText extends cc.RichText {
-    @property()
-    private _tid = "";
+const { ccclass, property, executeInEditMode, menu } = _decorator;
+
+@ccclass('LocalizedRichText')
+@executeInEditMode
+@menu('Localized/LocalizedRichText')
+export class LocalizedRichText extends RichText {
+    @property
+    private _tid = 'tid';
+
     @property({
         multiline: true,
-        tooltip: "多语言 text id",
+        displayOrder: 3,
+        tooltip: '多语言 text id',
     })
     set tid(value: string) {
         this._tid = value;
@@ -23,34 +27,48 @@ export default class LocalizedRichText extends cc.RichText {
     }
 
     protected onLoad() {
-        Game.NotifyUtil.on(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
         this.updateString();
-
+        AppGame.NotifyUtil.on(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
     }
 
-    protected onDestroy() {
-        Game.NotifyUtil.off(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
+    public onDestroy() {
+        AppGame.NotifyUtil.off(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
         super.onDestroy();
     }
 
+    /**
+     * 收到语言变更通知
+     *
+     * @private
+     * @memberof LocalizedLabel
+     */
     private onLanguageChanged() {
         this.updateString();
     }
 
-    private updateString() {
+    /**
+     * 更新文本
+     *
+     * @private
+     * @returns {*}
+     * @memberof LocalizedLabel
+     */
+    private updateString(): void {
         if (!this._tid) {
             return;
         }
-        if (CC_EDITOR) {
-            Editor.Ipc.sendToMain("game-helper:getLangStr", this._tid, (e: Error, str: string) => {
-                if (e) {
-                    return;
-                }
-                this.string = "" + str;
-            });
-        } else {
-            const str = "" + Game.LocalizeUtil.getLangStr(this._tid);
-            this.string !== str && (this.string = str);
+        if (EDITOR) {
+            // 编辑器模式下, 从插件中获取文本
+            console.log(this._tid);
+            this.editorUpdateString();
+            return;
         }
+        // 获取多语言文本
+        this.string = '' + AppGame.LocalizeUtil.getLangStr(this._tid);
+    }
+
+    private async editorUpdateString() {
+        const str = await Editor.Message.request(HELPER_PK_NAME, 'getLangStr', this._tid);
+        this.string = '' + str;
     }
 }

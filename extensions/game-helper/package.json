@@ -1,0 +1,34 @@
+{
+    "name": "game-helper",
+    "version": "1.0.0",
+    "package_version": 2,
+    "description": "项目扩展, 实现多语言预览",
+    "author": "yanjifa",
+    "main": "browser.js",
+    "contributions": {
+        "profile": {
+            "editor": {
+                "lang-config": {
+                    "default": "ad212f21-7a44-4745-8548-2f4113574e1c",
+                    "message": "game-helper-profile",
+                    "label": "config uuid"
+                }
+            },
+            "project": {
+                "lang-config": {
+                    "default": "ad212f21-7a44-4745-8548-2f4113574e1c",
+                    "message": "game-helper-profile",
+                    "label": "config uuid"
+                }
+            }
+        },
+        "messages": {
+            "asset-db:ready": {
+                "methods": ["onDBaReady"]
+            },
+            "getLangStr": {
+                "methods": ["getLangStr"]
+            }
+        }
+    }
+}

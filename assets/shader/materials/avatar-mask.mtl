@@ -1,17 +1,31 @@
 {
   "__type__": "cc.Material",
-  "_name": "avatarmask",
+  "_name": "",
   "_objFlags": 0,
   "_native": "",
   "_effectAsset": {
-    "__uuid__": "ad0db3a0-756c-4595-80aa-9056025113eb"
+    "__uuid__": "01791f31-8b55-4d0e-bc64-3f9f8f083552"
   },
-  "_techniqueIndex": 0,
-  "_techniqueData": {
-    "0": {
-      "defines": {
-        "USE_TEXTURE": true
-      }
+  "_techIdx": 0,
+  "_defines": [
+    {
+      "USE_TEXTURE": true
     }
-  }
+  ],
+  "_states": [
+    {
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      },
+      "depthStencilState": {},
+      "rasterizerState": {}
+    }
+  ],
+  "_props": [
+    {
+      "edge": 0.3
+    }
+  ]
 }

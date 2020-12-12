@@ -1,42 +1,44 @@
-import { ENotifyType, ESceneName } from "./Enum";
-import Game from "./Game";
 
-const {ccclass, property} = cc._decorator;
+import { Color, Component, Label, Node, SpriteComponent, tween, _decorator } from 'cc';
+import { ENotifyType, ESceneName } from './Enum';
+import AppGame from './AppGame';
+const { ccclass, property } = _decorator;
 
 const TEST = true;
 
-@ccclass
-export default class Main extends cc.Component {
-    @property(cc.Node)
-    private sceneRootNode: cc.Node = null;
+@ccclass('Main')
+export class Main extends Component {
+    @property(Node)
+    private sceneRootNode: Node = null;
 
-    @property(cc.Node)
-    private popViewRootNode: cc.Node = null;
+    @property(Node)
+    private popViewRootNode: Node = null;
 
-    @property(cc.Node)
-    private blockInputNode: cc.Node = null;
+    @property(Node)
+    private blockInputNode: Node = null;
 
-    @property(cc.Node)
-    private blockRedDot: cc.Node = null;
+    @property(Node)
+    private blockRedDot: Node = null;
 
-    @property(cc.Label)
-    private blockStateLabel: cc.Label = null;
+    @property(Label)
+    private blockStateLabel: Label = null;
 
-    @property(cc.Node)
-    private LoadingNode: cc.Node = null;
+    @property(Node)
+    private LoadingNode: Node = null;
 
-    @property(cc.Node)
-    private loadAnimNode: cc.Node = null;
+    @property(Node)
+    private loadAnimNode: Node = null;
 
     private blockInputRefNum = 0;
 
     private blockReasons: string[] = [];
 
     protected onLoad() {
-        window["Game"] = Game;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (globalThis as any).Game = AppGame;
         // 加载动画顶层遮罩
         this.LoadingNode.active = true;
-        cc.tween(this.loadAnimNode).by(0.1, { angle: -40 }).repeatForever().start();
+        tween(this.loadAnimNode).by(0.1, { angle: -40 }).repeatForever().start();
         //
         this.updateBlockInput();
         this.blockRedDot.active = TEST;
@@ -44,50 +46,50 @@ export default class Main extends cc.Component {
     }
 
     protected onDestroy() {
-        Game.NotifyUtil.off(ENotifyType.BLOCK_INPUT_SHOW, this.showBlockInput, this);
-        Game.NotifyUtil.off(ENotifyType.BLOCK_INPUT_HIDE, this.hideBlockInput, this);
+        AppGame.NotifyUtil.off(ENotifyType.BLOCK_INPUT_SHOW, this.showBlockInput, this);
+        AppGame.NotifyUtil.off(ENotifyType.BLOCK_INPUT_HIDE, this.hideBlockInput, this);
     }
 
     protected async start() {
         await this.gameSetup();
-        Game.NotifyUtil.on(ENotifyType.BLOCK_INPUT_SHOW, this.showBlockInput, this);
-        Game.NotifyUtil.on(ENotifyType.BLOCK_INPUT_HIDE, this.hideBlockInput, this);
+        AppGame.NotifyUtil.on(ENotifyType.BLOCK_INPUT_SHOW, this.showBlockInput, this);
+        AppGame.NotifyUtil.on(ENotifyType.BLOCK_INPUT_HIDE, this.hideBlockInput, this);
         //
-        Game.SceneManager.setSceneRootNode(this.sceneRootNode);
-        Game.PopViewManager.setPopViewRootNode(this.popViewRootNode);
+        AppGame.SceneManager.setSceneRootNode(this.sceneRootNode);
+        AppGame.PopViewManager.setPopViewRootNode(this.popViewRootNode);
         // 载入 Home 场景
-        await Game.SceneManager.gotoScene({
+        await AppGame.SceneManager.gotoScene({
             sceneName: ESceneName.HOME,
-            resDirs: ["home"],
-            prefabUrl: "home/prefab/Home",
+            resDirs: ['home'],
+            prefabUrl: 'home/prefab/Home',
         });
-        cc.tween(this.LoadingNode)
-            .to(0.2, { opacity: 0 })
+        tween(this.LoadingNode.getComponent(SpriteComponent))
+            .to(0.2, { color: new Color(255, 255, 255, 0) })
             .call(() => this.LoadingNode.active = false)
             .start();
     }
 
     private async gameSetup() {
-        await Game.StorageUtil.setup();
-        await Game.GameUtil.setup();
-        await Game.LocalizeUtil.setup();
-        await Game.NotifyUtil.setup();
-        await Game.AudioManager.setup();
-        await Game.PopViewManager.setup();
+        await AppGame.StorageUtil.setup();
+        await AppGame.GameUtil.setup();
+        await AppGame.LocalizeUtil.setup();
+        await AppGame.NotifyUtil.setup();
+        await AppGame.AudioManager.setup();
+        await AppGame.PopViewManager.setup();
     }
 
     private showBlockInput(reason: string) {
         this.blockInputRefNum += 1;
         this.blockReasons.push(reason);
         this.updateBlockInput();
-        console.log("blockinput block:", this.blockInputRefNum, reason);
+        console.log('blockinput block:', this.blockInputRefNum, reason);
     }
 
     private hideBlockInput(reason: string) {
         this.blockInputRefNum -= 1;
         this.blockReasons.splice(this.blockReasons.findIndex((o) => o === reason), 1);
         this.updateBlockInput();
-        console.log("blockinput allow:", this.blockInputRefNum, reason);
+        console.log('blockinput allow:', this.blockInputRefNum, reason);
     }
 
     private updateBlockInput() {
@@ -95,6 +97,6 @@ export default class Main extends cc.Component {
         if (!TEST) {
             return;
         }
-        this.blockStateLabel.string = this.blockReasons.join("\n");
+        this.blockStateLabel.string = this.blockReasons.join('\n');
     }
 }

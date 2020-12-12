@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "0850c5f5-4107-4808-8091-4e1327d3f9ed",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "791a5db7-fc0e-4f6d-90dd-858702b54854",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/scene/Home.js",
+    "importerSettings": 7
+  }
 }

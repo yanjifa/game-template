@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "95a6e315-13e8-4302-b134-4c216525e0b1",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "413b80f4-aedf-44a8-a11e-d01484f4ee62",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/base/BaseScene.js",
+    "importerSettings": 7
+  }
 }

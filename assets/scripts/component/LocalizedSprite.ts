@@ -1,16 +1,21 @@
-import { ENotifyType } from "../Enum";
-import Game from "../Game";
 
-const {ccclass, property, executeInEditMode, menu, inspector} = cc._decorator;
+import { resources, SpriteComponent, SpriteFrame, _decorator } from 'cc';
+import { EDITOR } from 'cce.env';
+import AppGame from '../AppGame';
+import { ENotifyType } from '../Enum';
 
-@ccclass
-@executeInEditMode()
-@menu(`${CC_EDITOR && Editor.T("game-helper.projectcomponent")}/LocalizedSprite`)
-@inspector("packages://game-helper/inspectors/localizedsprite.js")
-export default class LocalizedSprite extends cc.Sprite {
-    @property()
-    private _spriteUrl = "";
-    @property()
+const { ccclass, property, menu } = _decorator;
+
+@ccclass('LocalizedSprite')
+@menu('Localized/LocalizedSprite')
+export class LocalizedSprite extends SpriteComponent {
+    @property
+    private _spriteUrl = '';
+
+    @property({
+        displayOrder: 3,
+        tooltip: 'spriteFrame url, 语言目录使用 ${lang} 表示',
+    })
     set spriteUrl(value: string) {
         this._spriteUrl = value;
         this.updateSpriteFrame();
@@ -20,12 +25,12 @@ export default class LocalizedSprite extends cc.Sprite {
     }
 
     protected onLoad() {
-        Game.NotifyUtil.on(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
+        AppGame.NotifyUtil.on(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
         this.updateSpriteFrame();
     }
 
-    protected onDestroy() {
-        Game.NotifyUtil.off(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
+    public onDestroy() {
+        AppGame.NotifyUtil.off(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
         super.onDestroy();
     }
 
@@ -47,15 +52,18 @@ export default class LocalizedSprite extends cc.Sprite {
      * @memberof LocalizedLabel
      */
     private updateSpriteFrame(): void {
-        if (CC_EDITOR) {
+        if (EDITOR) {
             return;
         }
         if (!this._spriteUrl) {
             return;
         }
         if (this._spriteUrl) {
-            const lang = Game.LocalizeUtil.language;
-            this.spriteFrame = cc.resources.get<cc.SpriteFrame>(this._spriteUrl.replace("${lang}", lang), cc.SpriteFrame);
+            const lang = AppGame.LocalizeUtil.language;
+            this.spriteFrame.decRef();
+            const sf = resources.get<SpriteFrame>(this._spriteUrl.replace('${lang}', lang) + '/spriteFrame', SpriteFrame);
+            this.spriteFrame = sf;
+            sf.addRef();
         }
     }
 }

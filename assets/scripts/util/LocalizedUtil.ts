@@ -1,6 +1,7 @@
-import BaseSingleton from "../base/BaseSingeton";
-import { ELanguageType, ENotifyType, EStorageKey } from "../Enum";
-import Game from "../Game";
+import { JsonAsset, resources, sys } from 'cc';
+import BaseSingleton from '../base/BaseSingeton';
+import { ELanguageType, ENotifyType, EStorageKey } from '../Enum';
+import AppGame from '../AppGame';
 
 export default class LocalizedUtil extends BaseSingleton {
 
@@ -18,10 +19,11 @@ export default class LocalizedUtil extends BaseSingleton {
     private _language: ELanguageType = null;
 
     public async setup() {
-        const defaultLang = ELanguageType[cc.sys.language.toUpperCase()] || ELanguageType.EN;
-        this._language = Game.StorageUtil.read(EStorageKey.LANGUAGE, defaultLang) as ELanguageType;
+        // @ts-expect-error
+        const defaultLang = ELanguageType[sys.language.toUpperCase()] || ELanguageType.EN;
+        this._language = AppGame.StorageUtil.read(EStorageKey.LANGUAGE, defaultLang) as ELanguageType;
         await this.loadLanguageDir(this._language);
-        console.log("LocalizedUtil setup");
+        console.log('LocalizedUtil setup');
     }
 
     /**
@@ -32,9 +34,9 @@ export default class LocalizedUtil extends BaseSingleton {
      * @memberof LocalizedUtil
      */
     private async loadLanguageDir(lang: string) {
-        await Game.AssetManager.loadDir(`language/${lang}`);
+        await AppGame.AssetManager.loadDir(`language/${lang}`);
         const cfgPath = `language/${lang}/StringConfig`;
-        this.localizeCfgs = cc.resources.get<cc.JsonAsset>(cfgPath, cc.JsonAsset).json;
+        this.localizeCfgs = resources.get<JsonAsset>(cfgPath, JsonAsset).json as Record<string, string>;
     }
 
     /**
@@ -45,7 +47,7 @@ export default class LocalizedUtil extends BaseSingleton {
      * @memberof LocalizedUtil
      */
     private async releaseLanguageDir(lang: string) {
-        Game.AssetManager.releaseDir(`language/${lang}`);
+        AppGame.AssetManager.releaseDir(`language/${lang}`);
     }
 
     /**
@@ -60,12 +62,12 @@ export default class LocalizedUtil extends BaseSingleton {
         }
         const orginLang = this._language;
         this._language = lang;
-        Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_SHOW, "changeLanguage");
-        Game.StorageUtil.write(EStorageKey.LANGUAGE, lang);
+        AppGame.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_SHOW, 'changeLanguage');
+        AppGame.StorageUtil.write(EStorageKey.LANGUAGE, lang);
         await this.loadLanguageDir(lang);
-        Game.NotifyUtil.emit(ENotifyType.LANGUAGE_CHANGED);
+        AppGame.NotifyUtil.emit(ENotifyType.LANGUAGE_CHANGED);
         this.releaseLanguageDir(orginLang);
-        Game.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_HIDE, "changeLanguage");
+        AppGame.NotifyUtil.emit(ENotifyType.BLOCK_INPUT_HIDE, 'changeLanguage');
     }
 
     /**
@@ -76,10 +78,10 @@ export default class LocalizedUtil extends BaseSingleton {
      * @memberof LocalizedUtil
      */
     public getLangStr(tid: string): string {
-        const [id, ...args] = tid.split(",");
+        const [id, ...args] = tid.split(',');
         let str = this.localizeCfgs[id];
         args.forEach((arg, index) => {
-            str = str.replace("${p" + (index + 1) + "}", arg);
+            str = str.replace('${p' + (index + 1) + '}', arg);
         });
         return str;
     }

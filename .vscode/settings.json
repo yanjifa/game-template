@@ -1,9 +1,6 @@
 {
     "files.exclude": {
         "**/*.meta": true,
-        "library": true,
-        "local": true,
-        "temp": true
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true

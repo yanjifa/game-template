@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "5fd219ec-85ad-458f-9516-284e8f194382",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "a46e980a-37c5-4a21-9aed-51716ee08480",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/Main.js",
+    "importerSettings": 7
+  }
 }

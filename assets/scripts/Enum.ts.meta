@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "4702cf80-e5f0-4506-92ba-e86c197447b2",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "7ed36948-6b10-4a9a-aaf2-64215549ec3b",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/Enum.js",
+    "importerSettings": 7
+  }
 }

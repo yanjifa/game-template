@@ -1,7 +1,66 @@
 {
-  "ver": "2.1.0",
+  "ver": "1.0.5",
+  "importer": "bitmap-font",
+  "imported": true,
   "uuid": "1c668a67-271b-40f6-9f91-6b6a42c88f42",
-  "textureUuid": "469eee22-6e70-4919-8bd9-a7229a83909f",
-  "fontSize": 64,
-  "subMetas": {}
+  "files": [
+    ".json"
+  ],
+  "subMetas": {},
+  "userData": {
+    "_fntConfig": {
+      "commonHeight": 86,
+      "fontSize": 64,
+      "atlasName": "ArialUnicodeMs.png",
+      "fontDefDictionary": {
+        "20301": {
+          "rect": {
+            "x": 72,
+            "y": 2,
+            "width": 66,
+            "height": 66
+          },
+          "xOffset": 3,
+          "yOffset": 8,
+          "xAdvance": 64
+        },
+        "20307": {
+          "rect": {
+            "x": 2,
+            "y": 2,
+            "width": 68,
+            "height": 66
+          },
+          "xOffset": 2,
+          "yOffset": 7,
+          "xAdvance": 64
+        },
+        "22270": {
+          "rect": {
+            "x": 2,
+            "y": 70,
+            "width": 57,
+            "height": 63
+          },
+          "xOffset": 7,
+          "yOffset": 10,
+          "xAdvance": 64
+        },
+        "23383": {
+          "rect": {
+            "x": 140,
+            "y": 2,
+            "width": 62,
+            "height": 66
+          },
+          "xOffset": 6,
+          "yOffset": 7,
+          "xAdvance": 64
+        }
+      },
+      "kerningDict": {}
+    },
+    "fontSize": 64,
+    "textureUuid": "469eee22-6e70-4919-8bd9-a7229a83909f"
+  }
 }

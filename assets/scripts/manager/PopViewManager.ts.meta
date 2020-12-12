@@ -1,9 +1,17 @@
 {
-  "ver": "1.0.8",
-  "uuid": "15015928-3c01-4780-bd9e-efac2c810dcb",
-  "isPlugin": false,
-  "loadPluginInWeb": true,
-  "loadPluginInNative": true,
-  "loadPluginInEditor": false,
-  "subMetas": {}
+  "ver": "4.0.9",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "1aa49461-971a-47aa-98e1-f4bfb221b5f6",
+  "files": [
+    ".js",
+    "editor.js",
+    ".trans"
+  ],
+  "subMetas": {},
+  "userData": {
+    "importAsPlugin": false,
+    "moduleId": "project:///assets/scripts/manager/PopViewManager.js",
+    "importerSettings": 7
+  }
 }

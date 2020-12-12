@@ -1,18 +1,22 @@
-import { ENotifyType } from "../Enum";
-import Game from "../Game";
 
-const {ccclass, property, executeInEditMode, menu, inspector} = cc._decorator;
+import { BitmapFont, Label, resources, _decorator } from 'cc';
+import { EDITOR } from 'cce.env';
+import AppGame from '../AppGame';
+import { ENotifyType, HELPER_PK_NAME } from '../Enum';
 
-@ccclass
-@executeInEditMode()
-@menu(`${CC_EDITOR && Editor.T("game-helper.projectcomponent")}/LocalizedLabel`)
-@inspector("packages://game-helper/inspectors/localizedlabel.js")
-export default class LocalizedLabel extends cc.Label {
-    @property()
-    private _tid = "";
+const { ccclass, property, executeInEditMode, menu } = _decorator;
+
+@ccclass('LocalizedLabel')
+@executeInEditMode
+@menu('Localized/LocalizedLabel')
+export class LocalizedLabel extends Label {
+    @property
+    private _tid = '';
+
     @property({
         multiline: true,
-        tooltip: "多语言 text id",
+        displayOrder: 3,
+        tooltip: '多语言 text id',
     })
     set tid(value: string) {
         this._tid = value;
@@ -21,9 +25,13 @@ export default class LocalizedLabel extends cc.Label {
     get tid() {
         return this._tid;
     }
-    @property()
-    private _bmfontUrl = "";
-    @property()
+
+    @property
+    private _bmfontUrl = '';
+    @property({
+        displayOrder: 2,
+        visible: function(this: LocalizedLabel) { return this.font instanceof BitmapFont },
+    })
     set bmfontUrl(value: string) {
         this._bmfontUrl = value;
         this.updateString();
@@ -33,13 +41,12 @@ export default class LocalizedLabel extends cc.Label {
     }
 
     protected onLoad() {
-        super.onLoad();
-        Game.NotifyUtil.on(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
         this.updateString();
+        AppGame.NotifyUtil.on(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
     }
 
-    protected onDestroy() {
-        Game.NotifyUtil.off(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
+    public onDestroy() {
+        AppGame.NotifyUtil.off(ENotifyType.LANGUAGE_CHANGED, this.onLanguageChanged, this);
         super.onDestroy();
     }
 
@@ -64,22 +71,26 @@ export default class LocalizedLabel extends cc.Label {
         if (!this._tid) {
             return;
         }
-        if (CC_EDITOR) {
+        if (EDITOR) {
             // 编辑器模式下, 从插件中获取文本
-            Editor.Ipc.sendToMain("game-helper:getLangStr", this._tid, (e: Error, str: string) => {
-                if (e) {
-                    return;
-                }
-                this.string = "" + str;
-            });
-        } else {
-            // 获取多语言文本
-            this.string = "" + Game.LocalizeUtil.getLangStr(this._tid);
-            // 如果使用了 bmfont, 切换对应语言的 bmfont
-            if (!this.useSystemFont && this._bmfontUrl) {
-                const lang = Game.LocalizeUtil.language;
-                this.font = cc.resources.get<cc.BitmapFont>(this._bmfontUrl.replace("${lang}", lang), cc.BitmapFont);
-            }
+            console.log(this._tid);
+            this.editorUpdateString();
+            return;
         }
+        // 获取多语言文本
+        this.string = '' + AppGame.LocalizeUtil.getLangStr(this._tid);
+        // 如果使用了 bmfont, 切换对应语言的 bmfont
+        if (!this.useSystemFont && this._bmfontUrl) {
+            this.font.decRef();
+            const lang = AppGame.LocalizeUtil.language;
+            const font = resources.get<BitmapFont>(this._bmfontUrl.replace('${lang}', lang), BitmapFont);
+            this.font = font;
+            font.addRef();
+        }
+    }
+
+    private async editorUpdateString() {
+        const str = await Editor.Message.request(HELPER_PK_NAME, 'getLangStr', this._tid);
+        this.string = '' + str;
     }
 }

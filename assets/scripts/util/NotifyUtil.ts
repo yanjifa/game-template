@@ -1,8 +1,8 @@
-import * as _ from "lodash";
-import BaseSingleton from "../base/BaseSingeton";
-import { ENotifyType } from "../Enum";
+import BaseSingleton from '../base/BaseSingeton';
+import { ENotifyType } from '../Enum';
 
-type NotifyFn = (userData: unknown, notifyType?: ENotifyType) => void;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type NotifyFn = (userData: any, notifyType?: ENotifyType) => void;
 
 interface IObserver {
     func: NotifyFn;
@@ -24,6 +24,7 @@ export default class NotifyUtil extends BaseSingleton {
         // 检查 ENotifyType 拼写, 并初始化 observerMap
         for (const key in ENotifyType) {
             if (Object.prototype.hasOwnProperty.call(ENotifyType, key)) {
+                // @ts-expect-error
                 const notifyName = ENotifyType[key];
                 if (notifyName !== key) {
                     throw new Error(`Definition Error ${key} -> ${notifyName}`);
@@ -34,7 +35,7 @@ export default class NotifyUtil extends BaseSingleton {
     }
 
     public async setup() {
-        console.log("NotifyUtil setup");
+        console.log('NotifyUtil setup');
     }
 
     /**
@@ -58,7 +59,9 @@ export default class NotifyUtil extends BaseSingleton {
      * @memberof NotifyUtil
      */
     public off(notifyType: ENotifyType, notifyFunc: NotifyFn, target: unknown) {
-        _.remove(this.observerMap.get(notifyType), (o) => o.func === notifyFunc && o.target === target);
+        const observers = this.observerMap.get(notifyType);
+        const index = observers.findIndex((o) => o.func === notifyFunc && o.target === target);
+        index >= 0 && observers.splice(index, 1);
     }
 
     /**

@@ -1,5 +1,5 @@
-import Bluebird = require("bluebird");
-import BaseSingleton from "../base/BaseSingeton";
+import { resources } from 'cc';
+import BaseSingleton from '../base/BaseSingeton';
 
 /**
  * 资源管理器, 加载目录支持引用计数, 注意不可父子目录混用
@@ -12,7 +12,7 @@ export default class AssetManager extends BaseSingleton {
     private loadedResDirMap: Map<string, number> = new Map();
 
     public async setup() {
-        console.log("AssetManager setup");
+        console.log('AssetManager setup');
     }
 
     /**
@@ -27,12 +27,15 @@ export default class AssetManager extends BaseSingleton {
         if (!paths || paths.length <= 0) {
             return;
         }
-        await Bluebird.each(paths, (path, index, pathLen) => {
-            return this.loadDir(path, (percent) => {
+        console.log('begin load:', paths);
+        const pathLen = paths.length;
+        for (let index = 0; index < pathLen; index++) {
+            const path = paths[index];
+            await this.loadDir(path, (percent) => {
                 percent = percent / pathLen + index / pathLen;
                 progressCallback && progressCallback(percent);
             });
-        });
+        }
     }
 
     /**
@@ -51,8 +54,8 @@ export default class AssetManager extends BaseSingleton {
             return;
         }
         this.loadedResDirMap.set(path, ++refNum);
-        await Bluebird.fromCallback((callback) => {
-            cc.resources.loadDir(path, (finish, total, item) => {
+        await new Promise((callback) => {
+            resources.loadDir(path, (finish, total, item) => {
                 progressCallback && progressCallback(finish / total);
             }, callback);
         });
@@ -77,15 +80,16 @@ export default class AssetManager extends BaseSingleton {
      * @memberof AssetManager
      */
     public releaseDir(path: string): void {
+        // TODO 此方法无效
         let refNum = this.loadedResDirMap.get(path);
-        if (refNum === null && refNum === undefined) {
+        if (refNum === null || refNum === undefined) {
             return;
         }
         this.loadedResDirMap.set(path, --refNum);
         if (refNum > 0) {
             return;
         }
-        cc.resources.release(path);
+        resources.release(path);
         console.log(`AssetManager releaseDir: ${path}`);
     }
 
@@ -97,11 +101,11 @@ export default class AssetManager extends BaseSingleton {
      * @memberof AssetManager
      */
     public isDirLoaded(path: string): boolean {
-        return this.loadedResDirMap.get(path) > 0;
+        return this.loadedResDirMap.get(path) as number > 0;
     }
 
     public dumpDirMap() {
-        const data = [];
+        const data: Array<{dir: string, refNum: number}> = [];
         this.loadedResDirMap.forEach((v, k) => {
             v !== 0 && data.push({ dir: k, refNum: v });
         });
