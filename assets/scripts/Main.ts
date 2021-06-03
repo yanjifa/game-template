@@ -7,6 +7,9 @@ const TEST = true;
 
 @ccclass
 export default class Main extends cc.Component {
+    @property(cc.Camera)
+    private mainCamera: cc.Camera = null;
+
     @property(cc.Node)
     private sceneRootNode: cc.Node = null;
 
@@ -28,9 +31,18 @@ export default class Main extends cc.Component {
     @property(cc.Node)
     private loadAnimNode: cc.Node = null;
 
+    @property(cc.Sprite)
+    private effectSprite: cc.Sprite = null;
+
     private blockInputRefNum = 0;
 
     private blockReasons: string[] = [];
+
+    private renderTexture: cc.RenderTexture = null;
+
+    private renderSpriteFrame: cc.SpriteFrame = null;
+
+    private effectState = false;
 
     protected onLoad() {
         window["Game"] = Game;
@@ -41,25 +53,40 @@ export default class Main extends cc.Component {
         this.updateBlockInput();
         this.blockRedDot.active = TEST;
         this.blockStateLabel.node.active = TEST;
+        //
+        this.renderTexture = new cc.RenderTexture();
+        this.renderTexture.initWithSize(cc.winSize.width, cc.winSize.height);
+        this.renderTexture.setFlipY(true);
+        this.renderTexture.setPremultiplyAlpha(true);
+        this.renderSpriteFrame = new cc.SpriteFrame();
+        this.renderSpriteFrame.setTexture(this.renderTexture);
+        this.effectSprite.spriteFrame = this.renderSpriteFrame;
     }
 
     protected onDestroy() {
         Game.NotifyUtil.off(ENotifyType.BLOCK_INPUT_SHOW, this.showBlockInput, this);
         Game.NotifyUtil.off(ENotifyType.BLOCK_INPUT_HIDE, this.hideBlockInput, this);
+        Game.NotifyUtil.off(ENotifyType.CAMEAR_EFFECT, this.cameraEffect, this);
     }
 
     protected async start() {
         await this.gameSetup();
         Game.NotifyUtil.on(ENotifyType.BLOCK_INPUT_SHOW, this.showBlockInput, this);
         Game.NotifyUtil.on(ENotifyType.BLOCK_INPUT_HIDE, this.hideBlockInput, this);
+        Game.NotifyUtil.on(ENotifyType.CAMEAR_EFFECT, this.cameraEffect, this);
         //
         Game.SceneManager.setSceneRootNode(this.sceneRootNode);
         Game.PopViewManager.setPopViewRootNode(this.popViewRootNode);
         // 载入 Home 场景
+        // await Game.SceneManager.gotoScene({
+        //     sceneName: ESceneName.HOME,
+        //     resDirs: ["home"],
+        //     prefabUrl: "home/prefab/Home",
+        // });
         await Game.SceneManager.gotoScene({
-            sceneName: ESceneName.HOME,
-            resDirs: ["home"],
-            prefabUrl: "home/prefab/Home",
+            sceneName: ESceneName.SHARE,
+            resDirs: ["share"],
+            prefabUrl: "share/prefab/Share",
         });
         cc.tween(this.LoadingNode)
             .to(0.2, { opacity: 0 })
@@ -96,5 +123,16 @@ export default class Main extends cc.Component {
             return;
         }
         this.blockStateLabel.string = this.blockReasons.join("\n");
+    }
+
+    private cameraEffect() {
+        this.effectState = !this.effectState;
+        if (this.effectState) {
+            this.effectSprite.node.active = true;
+            this.mainCamera.targetTexture = this.renderTexture;
+        } else {
+            this.mainCamera.targetTexture = null;
+            this.effectSprite.node.active = false;
+        }
     }
 }

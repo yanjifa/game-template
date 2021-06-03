@@ -2,11 +2,16 @@
   "collision-matrix": [
     [
       true
+    ],
+    [
+      false,
+      false
     ]
   ],
   "excluded-modules": [],
   "group-list": [
-    "default"
+    "default",
+    "effect"
   ],
   "start-scene": "2d2f792f-a40c-49bb-a189-ed176a246e49",
   "design-resolution-width": 1920,
@@ -17,8 +22,8 @@
   "simulator-orientation": true,
   "use-customize-simulator": false,
   "simulator-resolution": {
-    "height": 1136,
-    "width": 640
+    "width": 640,
+    "height": 1136
   },
   "last-module-event-record-time": 1605370140731,
   "assets-sort-type": "name",

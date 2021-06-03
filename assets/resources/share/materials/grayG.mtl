@@ -1,0 +1,17 @@
+{
+  "__type__": "cc.Material",
+  "_name": "grayG",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "e36fffbc-8071-4d68-88db-21c8b85fa8ca"
+  },
+  "_techniqueIndex": 0,
+  "_techniqueData": {
+    "0": {
+      "defines": {
+        "USE_TEXTURE": true
+      }
+    }
+  }
+}

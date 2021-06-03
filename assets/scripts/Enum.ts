@@ -32,6 +32,7 @@ export enum ENotifyType {
     BLOCK_INPUT_SHOW = "BLOCK_INPUT_SHOW",   // active block input
     BLOCK_INPUT_HIDE = "BLOCK_INPUT_HIDE",   // disable block input
     SWITCH_SCENE     = "SWITCH_SCENE",       // 切换场景
+    CAMEAR_EFFECT    = "CAMEAR_EFFECT",      // fbo 特效
 }
 
 /**
@@ -41,7 +42,8 @@ export enum ENotifyType {
  * @enum {number}
  */
 export enum ESceneName {
-    HOME = "HOME", // 主场景
+    HOME  = "HOME",    // 主场景
+    SHARE = "SHARE",   // 分享会
 }
 
 /**
@@ -53,4 +55,8 @@ export enum ESceneName {
 export enum EViewName {
     SETTING        = "SETTING",          // 设置界面
     LIST_VIEW_DEMO = "LIST_VIEW_DEMO",   // listview 示范
+    INTRO          = "INTRO",            // 分享会
+    PIPELINE       = "PIPELINE",
+    RASTERIZATION  = "RASTERIZATION",
+    SHADER         = "SHADER",
 }

@@ -1,0 +1,135 @@
+
+CCEffect %{
+techniques: 
+  - passes: 
+      - vert: vs
+        frag: fs
+        blendState: 
+          targets: 
+            - blend: true
+        rasterizerState: 
+          cullMode: none
+        properties: 
+          texture: 
+            value: white
+          speed: 
+            value: 5.000
+          angularVelocity: 
+            value: 10.000
+          u_amplitude_5: 
+            value: 1
+          u_frequency_5: 
+            value: 1.000
+          u_phaseX_5: 
+            value: 0
+          u_phaseY_5: 
+            value: 0
+          amplitude: 
+            value: 0.096
+}%
+        
+CCProgram vs %{
+    precision highp float;
+    #include <cc-global>
+    #include <cc-local>
+
+    in vec3 a_position;
+    #if USE_TEXTURE
+        in vec2 a_uv0;
+        out vec2 v_uv0;
+    #endif  
+    in vec4 a_color;
+    out vec4 v_color;
+
+    void main () {
+        mat4 mvp;
+        #if CC_USE_MODEL
+            mvp = cc_matViewProj * cc_matWorld;
+        #else
+            mvp = cc_matViewProj;
+        #endif
+
+        #if USE_TEXTURE
+            v_uv0 = a_uv0;
+        #endif
+
+        #if USE_TINT
+            // clear warning for spine
+        #endif
+
+        v_color = a_color;
+        gl_Position = mvp * vec4(a_position, 1);
+    }
+}%
+        
+CCProgram fs %{
+    precision highp float;
+    #include <cc-global>
+    #if USE_TEXTURE
+        in vec2 v_uv0;
+        uniform sampler2D texture;
+    #endif
+    in vec4 v_color;
+    uniform Constant {
+		float speed;
+		float angularVelocity;
+		float u_amplitude_5;
+		float u_frequency_5;
+		float u_phaseX_5;
+		float u_phaseY_5;
+		float amplitude;
+	};
+
+    vec2 c_UV0_main_3() {
+	    return v_uv0;
+	}
+	vec4 c_Split4_main_10(vec4 Input) {
+	    return Input;
+	}
+	float c_Mul1_main_11(float InputA, float InputB) {
+	    return (InputA * InputB);
+	}
+	float c_Mul1_main_12(float InputA, float InputB) {
+	    return (InputA * InputB);
+	}
+	float c_Add1_main_13(float InputA, float InputB) {
+	    return (InputA + InputB);
+	}
+	float c_Sine1_main_5(float Input) {
+	    return u_amplitude_5 * sin(Input * u_frequency_5 + u_phaseX_5) + u_phaseY_5;
+	}
+	float c_Mul1_main_14(float InputA, float InputB) {
+	    return (InputA * InputB);
+	}
+	float c_Add1_main_4(float InputA, float InputB) {
+	    return (InputA + InputB);
+	}
+	vec2 c_2To2_main_16(float InputA, float InputB) {
+	    return vec2(InputA, InputB);
+	}
+	vec4 c_TextureToRGBA_main_15(vec2 UV, sampler2D Texture) {
+	    return texture2D(Texture, UV);
+	}
+	vec4 c_Output_main_1(vec4 Color) { 
+	    return Color; 
+	}
+	void main()                                    
+	{                                              
+	    vec2 out_UV_UV0_3 = c_UV0_main_3();
+	    float out_x_UV0_3 = out_UV_UV0_3.x;
+	    float out_y_UV0_3 = out_UV_UV0_3.y;
+	    vec4 out_Output_Split4_10 = c_Split4_main_10(vec4(cc_time));
+	    float out_x_Split4_10 = out_Output_Split4_10.x;
+	    float out_Output_Mul1_11 = c_Mul1_main_11(speed, out_x_Split4_10);
+	    float out_Output_Mul1_12 = c_Mul1_main_12(angularVelocity, out_x_UV0_3);
+	    float out_Output_Add1_13 = c_Add1_main_13(out_Output_Mul1_12, out_Output_Mul1_11);
+	    float out_Output_Sine1_5 = c_Sine1_main_5(out_Output_Add1_13);
+	    float out_Output_Mul1_14 = c_Mul1_main_14(amplitude, out_Output_Sine1_5);
+	    float out_Output_Add1_4 = c_Add1_main_4(out_Output_Mul1_14, out_y_UV0_3);
+	    vec2 out_Output_2To2_16 = c_2To2_main_16(out_x_UV0_3, out_Output_Add1_4);
+	    vec4 out_Color_TextureToRGBA_15 = c_TextureToRGBA_main_15(vec2(out_Output_2To2_16), texture);
+	    gl_FragColor = c_Output_main_1(vec4(out_Color_TextureToRGBA_15));
+	}                                              
+	
+}%
+        

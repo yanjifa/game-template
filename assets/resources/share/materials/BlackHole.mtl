@@ -1,0 +1,23 @@
+{
+  "__type__": "cc.Material",
+  "_name": "BlackHole",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "2e09f8ed-7f2e-4307-9fba-03975fe108b6"
+  },
+  "_techniqueIndex": 0,
+  "_techniqueData": {
+    "0": {
+      "props": {
+        "uSpeed": "2.0",
+        "uScale": "1.0",
+        "uDistortion": "1.0",
+        "uHole": "0.2"
+      },
+      "defines": {
+        "USE_TEXTURE": true
+      }
+    }
+  }
+}
