@@ -1,7 +1,7 @@
 {
   "engine": "cocos2d-html5",
   "packages": "packages",
-  "version": "2.4.3",
+  "version": "2.4.5",
   "name": "game-template",
   "id": "839f8f73-427c-4561-9a54-bc2a88ac75ea",
   "isNew": false
